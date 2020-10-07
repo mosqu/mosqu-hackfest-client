@@ -1,4 +1,5 @@
 # mosqu-app
+[![Netlify Status](https://api.netlify.com/api/v1/badges/790741be-0a56-4130-9d0c-f0ce6a4adfbf/deploy-status)](https://app.netlify.com/sites/mosqu/deploys)
 
 ## Project setup
 ```
