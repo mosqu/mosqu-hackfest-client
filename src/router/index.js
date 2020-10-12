@@ -12,6 +12,7 @@ import DetailMasjid from '../components/DetailMasjid.vue'
 import Home from '../views/Home.vue'
 import About from '../components/About.vue'
 import SignIn from '../components/SignIn.vue'
+import SignUp from '../components/SignUp.vue'
 
 import ErrorPage from '../views/Error.vue'
 
@@ -33,9 +34,14 @@ const routes = [
         component: About
       },
       {
-        path: 'signin',
-        name: 'SignIn',
+        path: 'masuk',
+        name: 'Masuk',
         component: SignIn
+      },
+      {
+        path: 'daftar',
+        name: 'Daftar',
+        component: SignUp
       }
     ]
   },

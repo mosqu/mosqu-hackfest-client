@@ -1,9 +1,9 @@
 <template>
   <v-container fluid pa-0>
-    <v-row no-gutters wrap align="stretch">
+    <v-row no-gutters wrap align="center">
       <v-col>
-        <v-card flat class="px-6">
-          <v-flex ma-16 v-if="$route.name == 'Home'" align-self-center>
+        <v-card flat class="ma-16">
+          <v-flex v-if="$route.name == 'Home'" align-self-center>
             <h1 class="ma-2">Platform Masjid Online</h1>
             <p class="ma-2">
               Urusan masjid jadi mudah! Platform pertama untuk digitalisasi
@@ -29,9 +29,10 @@
       <v-col>
         <v-card
           id="mosque-image"
-          class="teal lighten-3 rounded-l-xl"
+          class="d-flex align-center teal lighten-3 rounded-l-xl fill-height"
           tile
           ripple
+          app
         >
           <v-img
             :src="require('../assets/masjid-landingpage.png')"

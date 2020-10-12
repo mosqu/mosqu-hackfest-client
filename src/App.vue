@@ -1,14 +1,14 @@
 <template>
   <v-app>
     <v-app-bar app color="white" flat>
-      <div class="d-flex align-center">
+      <div v-if="$vuetify.breakpoint.smAndUp" class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
           class="shrink mr-2"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          :src="require('./assets/mosqu-logo.png')"
           transition="scale-transition"
-          width="40"
+          width="60"
         />
         <v-btn text :ripple="true" to="/home" exact>Beranda</v-btn>
         <v-btn text :ripple="true" to="/home/about">Tentang</v-btn>
@@ -18,8 +18,8 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn color="teal white--text">Daftar</v-btn>
-      <v-btn text color="white--text">Masuk</v-btn>
+      <v-btn color="teal white--text" :ripple="true" href="/home/daftar">Daftar</v-btn>
+      <v-btn text color="white--text" :ripple="true" href="/home/masuk">Masuk</v-btn>
     </v-app-bar>
 
     <v-main>
@@ -35,9 +35,9 @@
           alt="Vuetify Logo"
           class="shrink"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          :src="require('./assets/mosqu-logo.png')"
           transition="scale-transition"
-          width="40"
+          width="60"
         />
         <p class="text-caption white--text">&copy; 2020 MosQu</p>
       </v-card>
