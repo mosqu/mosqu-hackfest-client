@@ -1,6 +1,7 @@
 <template>
-  <v-flex>
+  <v-flex class="d-flex flex-column align-start">
     <v-text-field outlined label="Username"></v-text-field>
+    <v-text-field outlined label="Email"></v-text-field>
     <v-text-field
       outlined
       :type="showPass ? 'text' : 'password'"
@@ -8,7 +9,7 @@
       :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
       @click:append="showPass = !showPass"
     ></v-text-field>
-    <v-btn color="primary">Masuk!</v-btn>
+    <v-btn color="primary">Daftar!</v-btn>
   </v-flex>
 </template>
 
