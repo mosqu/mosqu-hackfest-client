@@ -15,6 +15,11 @@
         <v-btn text :ripple="true" to="/cari/masjid">Cari Masjid</v-btn>
       </div>
 
+      <v-app-bar-nav-icon
+        v-else
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
+
       <v-spacer></v-spacer>
 
       <v-card
@@ -46,6 +51,32 @@
         <v-icon @click="logout">mdi-logout</v-icon>
       </div>
     </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-flex class="ma-2 d-flex" align-center>
+        <v-img
+          alt="Vuetify Logo"
+          class="mr-2 shrink align-self-center"
+          contain
+          :src="require('./assets/mosqu-logo.png')"
+          transition="scale-transition"
+          width="60"
+        />MosQu
+      </v-flex>
+      <v-list nav>
+        <v-list-item-group>
+          <v-list-item to="/home" exact> Beranda </v-list-item>
+
+          <v-list-item to="/home/about"> Tentang </v-list-item>
+
+          <v-list-item to="/cari/masjid"> Cari Masjid </v-list-item>
+
+          <v-list-item to="/home/daftar"> Daftar </v-list-item>
+
+          <v-list-item to="/home/masuk"> Masuk </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-main>
       <router-view />
@@ -157,6 +188,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      drawer: false,
+    };
+  },
   methods: {
     isHome: function () {
       return this.$route.path.includes("home");
