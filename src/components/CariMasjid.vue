@@ -1,20 +1,20 @@
 <template>
-  <v-row no-gutters>
-    <v-col v-if="isLoading">
+  <v-row v-if="!isError" no-gutters wrap>
+    <v-col v-if="isLoading" lg="4" md="6" sm="12">
       <v-skeleton-loader
         class="mx-auto"
         max-width="300"
         type="card"
       ></v-skeleton-loader>
     </v-col>
-    <v-col v-if="isLoading">
+    <v-col v-if="isLoading" lg="4" md="6" sm="12">
       <v-skeleton-loader
         class="mx-auto"
         max-width="300"
         type="card"
       ></v-skeleton-loader>
     </v-col>
-    <v-col v-if="isLoading">
+    <v-col v-if="isLoading" lg="4" md="6" sm="12">
       <v-skeleton-loader
         class="mx-auto"
         max-width="300"
@@ -23,6 +23,11 @@
     </v-col>
     <v-col v-for="masjid in masjids" :key="masjid._id" lg="4" md="6" sm="12">
       <CardMasjid v-bind:masjid="masjid"></CardMasjid>
+    </v-col>
+  </v-row>
+  <v-row v-else >
+    <v-col align="center">
+      <div>Maaf terjadi kesalahan dalam pengambilan data</div>
     </v-col>
   </v-row>
 </template>
@@ -39,7 +44,8 @@ export default {
   data() {
     return {
       masjids: [],
-      isLoading: true
+      isLoading: true,
+      isError: false
     };
   },
   mounted() {
@@ -50,6 +56,8 @@ export default {
         this.isLoading = false;
       })
       .catch((error) => {
+        this.isLoading = false;
+        this.isError = true;
         console.log(error);
       });
   },
