@@ -51,7 +51,7 @@
       <router-view />
     </v-main>
 
-    <v-footer class="py-8 d-flex align-stretch" color="primary">
+    <v-footer class="mt-8 d-flex align-stretch" color="primary">
       <v-flex
         class="my-4 mr-4 d-flex align-self-center flex-column align-center"
       >
