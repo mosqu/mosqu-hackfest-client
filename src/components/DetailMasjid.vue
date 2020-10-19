@@ -20,14 +20,13 @@
       <v-col cols="6">
         <h2>Alamat</h2>
         <v-img
-          contain
           src="https://www.google.com/maps/d/u/0/thumbnail?mid=1XvQTdZtePT9HENbbQoTBZcXJXhU"
           height="300"
         ></v-img>
         <p>Ini alamat</p>
         <h2>Kontak</h2>
         <p>Ini kontak</p>
-        <h2>Donasi</h2>
+        <h2>Donasi</h2> 
         <v-img
           contain
           src="https://www.kaspersky.com/content/en-global/images/repository/isc/2020/9910/a-guide-to-qr-codes-and-how-to-scan-qr-codes-2.png"
