@@ -70,9 +70,10 @@ const routes = [
     component: Detail,
     children: [
       {
-        path: 'masjid',
+        path: 'masjid/:masjid_uid',
         name: 'DetailMasjid',
-        component: DetailMasjid
+        component: DetailMasjid,
+        props: true
       },
       {
         path: 'event',

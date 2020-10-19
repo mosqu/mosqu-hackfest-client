@@ -6,7 +6,7 @@
       hover
       width="300"
       :elevation="hover ? 16 : 2"
-      :to="{ path: '/detail/masjid', query: { id: masjid.masjid_uid } }"
+      :to="{ path: '/detail/masjid/' + masjid.masjid_uid }"
     >
       <v-img
         class="white--text align-end"
@@ -51,8 +51,8 @@ export default {
   props: ["masjid"],
   mounted() {
     setTimeout(() => {
-      if(!this.masjid.imgUrl){
-        this.timeout = true
+      if (!this.masjid.imgUrl) {
+        this.timeout = true;
       }
     }, 3000);
   },
