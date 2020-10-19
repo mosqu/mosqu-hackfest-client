@@ -1,6 +1,6 @@
 <template>
   <v-container fluid pa-0>
-    <v-row no-gutters wrap align="center">
+    <v-row no-gutters wrap align="start">
       <v-col>
         <v-card flat class="ma-16">
           <v-flex v-if="$route.name == 'Home'" align-self-center>
@@ -29,7 +29,7 @@
       <v-col>
         <v-card
           id="mosque-image"
-          class="d-flex align-center teal lighten-3 rounded-l-xl fill-height"
+          class="d-flex align-end teal lighten-3 rounded-l-xl fill-height"
           tile
           ripple
           app

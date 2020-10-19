@@ -1,5 +1,13 @@
 <template>
   <v-row no-gutters>
+    <v-col v-for="n in 3" :key="n">
+      <v-skeleton-loader
+        v-if="isLoading"
+        class="mx-auto"
+        max-width="300"
+        type="card"
+      ></v-skeleton-loader>
+    </v-col>
     <v-col v-for="event in events" :key="event.id" lg="4" md="6" xs="12">
       <CardEvent v-bind:event="event"></CardEvent>
     </v-col>
@@ -17,6 +25,7 @@ export default {
   },
   data() {
     return {
+      isLoading: true,
       events: [
         {
           id: "E0001",
