@@ -13,7 +13,6 @@
         <v-btn text :ripple="true" to="/home" exact>Beranda</v-btn>
         <v-btn text :ripple="true" to="/home/about">Tentang</v-btn>
         <v-btn text :ripple="true" to="/cari/masjid">Cari Masjid</v-btn>
-        <v-btn text :ripple="true" to="/cari/event">Cari Event</v-btn>
       </div>
 
       <v-spacer></v-spacer>

@@ -54,7 +54,7 @@ export default {
       if(!this.masjid.imgUrl){
         this.timeout = true
       }
-    }, 5000);
+    }, 3000);
   },
 };
 </script>
