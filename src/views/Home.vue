@@ -1,7 +1,7 @@
 <template>
   <v-container fluid pa-0>
     <v-row no-gutters wrap align="start">
-      <v-col>
+      <v-col sm="12" md="12" lg="6">
         <v-card flat class="ma-16">
           <v-flex v-if="$route.name == 'Home'" align-self-center>
             <h1 class="ma-2">Platform Masjid Online</h1>
@@ -29,7 +29,8 @@
       <v-col>
         <v-card
           id="mosque-image"
-          class="d-flex align-end teal lighten-3 rounded-l-xl fill-height"
+          class="d-flex align-end teal lighten-3 fill-height"
+          :class="$vuetify.breakpoint.lgAndUp ? 'rounded-l-xl' : 'rounded-t-xl'"
           tile
           ripple
           app

@@ -5,7 +5,7 @@ import router from "../router";
 
 Vue.use(Vuex);
 
-axios.defaults.baseURL = "http://mosqu-service.herokuapp.com";
+axios.defaults.baseURL = "https://mosqu-service.herokuapp.com";
 
 export default new Vuex.Store({
   state: {

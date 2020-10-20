@@ -8,7 +8,7 @@
           contain
           :src="require('./assets/mosqu-logo.png')"
           transition="scale-transition"
-          width="60"
+          width="50"
         />
         <v-btn text :ripple="true" to="/home" exact>Beranda</v-btn>
         <v-btn text :ripple="true" to="/home/about">Tentang</v-btn>
@@ -18,13 +18,25 @@
       <v-app-bar-nav-icon
         v-else
         @click.stop="drawer = !drawer"
-      ></v-app-bar-nav-icon>
+      />
+
+      <v-flex v-if="$vuetify.breakpoint.xsOnly" class="d-flex" align-center>
+        <v-img
+          alt="Vuetify Logo"
+          class="mr-2 shrink align-self-center"
+          contain
+          :src="require('./assets/mosqu-logo.png')"
+          transition="scale-transition"
+          width="50"
+        />
+        <h4>MosQu</h4>
+      </v-flex>
 
       <v-spacer></v-spacer>
 
       <v-card
         class="px-4 text-button"
-        v-if="!this.$store.getters.isLoggedIn"
+        v-if="!this.$store.getters.isLoggedIn && $vuetify.breakpoint.smAndUp"
         color="teal white--text"
         :ripple="true"
         style="text-decoration: none; background-color: inherit"
@@ -34,7 +46,7 @@
       <v-card
         flat
         class="px-4 text-button"
-        v-if="!this.$store.getters.isLoggedIn"
+        v-if="!this.$store.getters.isLoggedIn && $vuetify.breakpoint.smAndUp"
         text
         color="grey--text text--darken-2"
         :ripple="true"
@@ -60,7 +72,7 @@
           contain
           :src="require('./assets/mosqu-logo.png')"
           transition="scale-transition"
-          width="60"
+          width="50"
         />MosQu
       </v-flex>
       <v-list nav>

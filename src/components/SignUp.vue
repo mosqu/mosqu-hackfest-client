@@ -1,50 +1,54 @@
 <template>
   <v-flex class="d-flex flex-column align-start">
     <h2>Daftar</h2>
-    <v-text-field
-      class="mt-4"
-      outlined
-      v-model.trim="$v.signUpForm.username.$model"
-      :error-messages="usernameError"
-      label="Username"
-    ></v-text-field>
-    <v-text-field
-      outlined
-      v-model.trim="$v.signUpForm.full_name.$model"
-      :error-messages="fullnameError"
-      label="Nama Lengkap"
-    ></v-text-field>
-    <v-text-field
-      outlined
-      v-model.trim="$v.signUpForm.email.$model"
-      :error-messages="emailError"
-      label="Email"
-    ></v-text-field>
-    <v-text-field
-      outlined
-      v-model.trim="$v.signUpForm.password.$model"
-      :error-messages="passwordError"
-      :type="showPass ? 'text' : 'password'"
-      label="Password"
-      :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-      @click:append="showPass = !showPass"
-    ></v-text-field>
-    <v-btn @click="submitSignUp" color="primary">Daftar!</v-btn>
-    <p v-if="isFormError" class="mt-2 red--text text-caption error-caption">
-      "Manusia memang sering melakukan kesalahan, tapi yang terpenting adalah
-      bagaimana kita memperbaikinya" <br />
-      -Admin
-    </p>
-    <p
-      v-if="isSignUpSuccess"
-      class="mt-2 primary--text text-caption error-caption"
-    >
-      Alhamdulillah akun telah terdaftar, silahkan untuk melakukan  <a to="/home/masuk">Login</a> :)
-    </p>
+    <form v-on:keyup.enter="submitSignUp">
+      <v-text-field
+        class="mt-4"
+        outlined
+        v-model.trim="$v.signUpForm.username.$model"
+        :error-messages="usernameError"
+        label="Username"
+      ></v-text-field>
+      <v-text-field
+        outlined
+        v-model.trim="$v.signUpForm.full_name.$model"
+        :error-messages="fullnameError"
+        label="Nama Lengkap"
+      ></v-text-field>
+      <v-text-field
+        outlined
+        v-model.trim="$v.signUpForm.email.$model"
+        :error-messages="emailError"
+        label="Email"
+      ></v-text-field>
+      <v-text-field
+        outlined
+        v-model.trim="$v.signUpForm.password.$model"
+        :error-messages="passwordError"
+        :type="showPass ? 'text' : 'password'"
+        label="Password"
+        :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+        @click:append="showPass = !showPass"
+      ></v-text-field>
+      <v-btn @click="submitSignUp" color="primary">Daftar!</v-btn>
+      <p v-if="isFormError" class="mt-2 red--text text-caption error-caption">
+        "Manusia memang sering melakukan kesalahan, tapi yang terpenting adalah
+        bagaimana kita memperbaikinya" <br />
+        -Admin
+      </p>
+      <p
+        v-if="isSignUpSuccess"
+        class="mt-2 primary--text text-caption error-caption"
+      >
+        Alhamdulillah akun telah terdaftar, silahkan untuk melakukan
+        <a to="/home/masuk">Login</a> :)
+      </p>
 
-    <p v-if="isSignUpError" class="mt-2 red--text text-caption error-caption">
-      Maaf, terjadi kesalahan saat pendaftaran akun, mohon ulangi pendaftaran kembali. ^^
-    </p>
+      <p v-if="isSignUpError" class="mt-2 red--text text-caption error-caption">
+        Maaf, terjadi kesalahan saat pendaftaran akun, mohon ulangi pendaftaran
+        kembali. ^^
+      </p>
+    </form>
   </v-flex>
 </template>
 
