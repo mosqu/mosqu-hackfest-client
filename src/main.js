@@ -7,7 +7,7 @@ import Vuelidate from 'vuelidate'
 import Vuex from 'vuex'
 import store from './store/auth'
 
-axios.defaults.baseURL = 'http://mosqu-service.herokuapp.com'
+axios.defaults.baseURL = 'https://mosqu-service.herokuapp.com'
 Vue.prototype.axios = axios
 
 Vue.config.productionTip = false
