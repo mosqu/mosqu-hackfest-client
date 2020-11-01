@@ -10,7 +10,6 @@ import DetailEvent from '../components/DetailEvent.vue'
 import DetailMasjid from '../components/DetailMasjid.vue'
 
 import Home from '../views/Home.vue'
-import About from '../components/About.vue'
 import SignIn from '../components/SignIn.vue'
 import SignUp from '../components/SignUp.vue'
 
@@ -21,29 +20,18 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/home'
+    name: 'Home',
+    component: Home
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: Home,
-    children: [
-      {
-        path: 'about',
-        name: 'About',
-        component: About
-      },
-      {
-        path: 'masuk',
-        name: 'Masuk',
-        component: SignIn
-      },
-      {
-        path: 'daftar',
-        name: 'Daftar',
-        component: SignUp
-      }
-    ]
+    path: '/daftar',
+    name: 'Daftar',
+    component: SignIn
+  },
+  {
+    path: '/masuk',
+    name: 'Masuk',
+    component: SignUp
   },
   {
     path: '/cari',
