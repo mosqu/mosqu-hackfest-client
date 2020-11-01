@@ -1,48 +1,62 @@
 <template>
-  <v-container fluid pa-0>
-    <v-row no-gutters wrap align="start">
-      <v-col sm="12" md="12" lg="6">
-        <v-card flat class="ma-16">
-          <v-flex v-if="$route.name == 'Home'" align-self-center>
-            <h1 class="ma-2">Platform Masjid Online</h1>
-            <p class="ma-2">
-              Urusan masjid jadi mudah! Platform pertama untuk digitalisasi
-              masjid di Indonesia!
-            </p>
-            <v-btn
-              class="ma-2"
-              color="teal white--text"
-              elevation="2"
-              to="/cari/masjid"
-              >Cari Masjid</v-btn
-            >
-            <v-btn
-              class="ma-2"
-              color="deep-orange lighten-1 white--text"
-              elevation="2"
-              >Cari Event</v-btn
-            >
-          </v-flex>
-          <router-view />
-        </v-card>
-      </v-col>
-      <v-col>
-        <v-card
-          id="mosque-image"
-          class="d-flex align-end teal lighten-3 fill-height"
-          :class="$vuetify.breakpoint.lgAndUp ? 'rounded-l-xl' : 'rounded-t-xl'"
-          tile
-          ripple
-          app
-        >
-          <v-img
-            :src="require('../assets/masjid-landingpage.png')"
-            contain
-            max-height="560"
-            transition="scale-transition"
-          />
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div>
+    <section id="home">
+      <v-container fluid pa-0>
+        <v-row no-gutters wrap align="start">
+          <v-col sm="12" md="6" lg="4">
+            <v-card flat class="ma-16">
+              <v-flex v-if="$route.name == 'Home'" align-self-center>
+                <div class="ma-2 display-1 font-weight-bold">Ingin Donasi di Masjid Anda lebih besar dan mudah?</div>
+                <div class="ma-2 subtitle-1">
+                  Kami bisa membantu Anda. Urusan masjid jadi mudah! Platform pertama untuk digitalisasi
+                  masjid di Indonesia!
+                </div>
+              </v-flex>
+              <router-view />
+            </v-card>
+          </v-col>
+          <v-col sm="12" md="6" lg="8">
+            <v-img
+                :src="require('../assets/landingpage.png')"
+                max-height="560"
+                transition="scale-transition"
+              />
+          </v-col>
+        </v-row>
+      </v-container>
+    </section>
+    <section id="about">
+      <HomeAbout />
+    </section>
+    <section id="feature">
+      <HomeFeature />
+    </section>
+    <section id="register">
+      <HomeRegister />
+    </section>
+    <section id="faq">
+      <HomeFAQ />
+    </section>
+    <section id="footer">
+      <HomeFooter />
+    </section>
+  </div>
 </template>
+
+<script>
+  import HomeAbout from "../components/HomeAbout";
+  import HomeFeature from "../components/HomeFeature";
+  import HomeRegister from "../components/HomeRegister";
+  import HomeFAQ from "../components/HomeFAQ";
+  import HomeFooter from "../components/HomeFooter";
+
+  export default {
+    components: {
+      HomeAbout,
+      HomeFeature,
+      HomeRegister,
+      HomeFAQ,
+      HomeFooter
+    }
+  }
+</script>
