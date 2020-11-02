@@ -2,7 +2,7 @@
   <div>
     <section id="home">
       <v-container fluid pa-0>
-        <v-row no-gutters wrap align="start">
+        <v-row no-gutters wrap align="start" heigh="900px">
           <v-col sm="12" md="6" lg="4">
             <v-card flat class="ma-16">
               <v-flex v-if="$route.name == 'Home'" align-self-center>
@@ -17,9 +17,10 @@
           </v-col>
           <v-col sm="12" md="6" lg="8">
             <v-img
-                :src="require('../assets/landingpage.png')"
+                :src="require('../assets/landingpage2.svg')"
                 max-height="560"
-                transition="scale-transition"
+                contain
+                class="mb-10"
               />
           </v-col>
         </v-row>

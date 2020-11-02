@@ -20,6 +20,9 @@
           <a href="/#feature" style="text-decoration: none;">
             <v-btn text :ripple="true">Fitur</v-btn>
           </a>
+          <a href="/#faq" style="text-decoration: none;">
+            <v-btn text :ripple="true">FAQ</v-btn>
+          </a>
         </div>
       </div>
 
