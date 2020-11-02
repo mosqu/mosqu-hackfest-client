@@ -26,12 +26,12 @@ const routes = [
   {
     path: '/daftar',
     name: 'Daftar',
-    component: SignIn
+    component: SignUp
   },
   {
     path: '/masuk',
     name: 'Masuk',
-    component: SignUp
+    component: SignIn
   },
   {
     path: '/cari',
