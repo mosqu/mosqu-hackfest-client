@@ -2,8 +2,8 @@
   <div>
     <v-container fluid pa-0 class=" fill-height" style="min-height: 600px">
         <v-row no-gutters wrap align="start" heigh="900px">
-          <v-col sm="12" md="6" lg="4">
-            <div class="content ma-16">
+          <v-col sm="12" md="6" lg="6">
+            <v-card flat class="content ma-16">
                 <div class="display-1 mb-3 font-weight-bold">
                     Daftarkan Sekarang
                 </div>
@@ -22,14 +22,13 @@
                         </v-btn>
                     </a>
                 </div>
-            </div>
+            </v-card>
           </v-col>
-          <v-col sm="12" md="6" lg="8">
+          <v-col sm="12" md="6" lg="6" class="pa-10">
             <v-img
-                :src="require('../assets/landingpage1.svg')"
-                max-height="360"
+                :src="require('../assets/illustration1.svg')"
+                max-width="100%"
                 contain
-                class="mb-10"
               />
           </v-col>
         </v-row>

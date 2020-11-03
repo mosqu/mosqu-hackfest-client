@@ -15,12 +15,11 @@
               <router-view />
             </v-card>
           </v-col>
-          <v-col sm="12" md="6" lg="8">
+          <v-col sm="12" md="6" lg="8" class="pa-10">
             <v-img
-                :src="require('../assets/landingpage2.svg')"
+                :src="require('../assets/illustration2.svg')"
                 max-height="560"
                 contain
-                class="mb-10"
               />
           </v-col>
         </v-row>
