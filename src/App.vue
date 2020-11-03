@@ -1,16 +1,16 @@
 <template>
   <v-app>
-    <v-app-bar app color="white" flat>
-      <div v-if="$vuetify.breakpoint.smAndUp" class="d-flex align-center text-no-wrap">
+    <v-app-bar app :color="bg" flat>
+      <div v-if="$vuetify.breakpoint.smAndUp" class="d-flex align-center">
         <v-img
-          alt="Vuetify Logo"
-          class="shrink"
+          alt="MOSQU Logo"
+          class="shrink mr-2"
           contain
           :src="require('./assets/mosqu-logo.png')"
           transition="scale-transition"
           width="50"
         />
-        <div class="menu">
+        <div class="menu ml-10">
           <a href="/#home" style="text-decoration: none;">
             <v-btn text :ripple="true" exact>Beranda</v-btn>
           </a>
@@ -23,6 +23,7 @@
           <a href="/#faq" style="text-decoration: none;">
             <v-btn text :ripple="true">FAQ</v-btn>
           </a>
+          <v-btn text :ripple="true" to="/cari/masjid">Cari Masjid</v-btn>
         </div>
       </div>
 
@@ -40,7 +41,7 @@
           transition="scale-transition"
           width="50"
         />
-        <h4>MosQu</h4>
+        <h4>MOSQU</h4>
       </v-flex>
 
       <v-spacer></v-spacer>
@@ -77,7 +78,7 @@
       </div>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" app temporary>
+    <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-flex class="ma-2 d-flex" align-center>
         <v-img
           alt="Vuetify Logo"
@@ -86,21 +87,33 @@
           :src="require('./assets/mosqu-logo.png')"
           transition="scale-transition"
           width="50"
-        />MosQu
+        />MOSQU
       </v-flex>
       <v-list nav>
         <v-list-item-group>
-          <v-list-item to="/#home" exact> Beranda </v-list-item>
+          <v-list-item exact>
+            <a href="/#home" class="black--text" style="text-decoration: none;">Beranda</a>
+          </v-list-item>
 
-          <v-list-item to="/#about"> Tentang </v-list-item>
+          <v-list-item>
+            <a href="/#about" class="black--text" style="text-decoration: none;">About</a>
+          </v-list-item>
 
-          <v-list-item to="/#feature"> Fitur </v-list-item>
+          <v-list-item>
+            <a href="/#fitur" class="black--text" style="text-decoration: none;">Fitur</a>
+          </v-list-item>
 
-          <v-list-item to="/#faq"> FAQ </v-list-item>
+          <v-list-item>
+            <a href="/#faq" class="black--text" style="text-decoration: none;">FAQ</a>
+          </v-list-item>
 
-          <v-list-item to="/daftar"> Daftar </v-list-item>
+          <v-list-item to="/cari/masjid">Cari Masjid</v-list-item>
 
-          <v-list-item to="/masuk"> Masuk </v-list-item>
+          <v-list-item to="/#daftar">
+            <a href="/#daftar" class="black--text" style="text-decoration: none;">Daftar</a>
+          </v-list-item>
+
+          <v-list-item to="/masuk">Masuk</v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -117,6 +130,7 @@
     data() {
       return {
         drawer: false,
+        bg: 'white'
       };
     },
     methods: {
@@ -126,6 +140,22 @@
       logout: function () {
         this.$store.dispatch("logout");
       },
+      changeColor() {
+        if (
+          document.body.scrollTop > 100 ||
+          document.documentElement.scrollTop > 100
+        ) {
+          this.bg = 'white';
+        } else {
+          this.bg = 'white';
+        }
+      },
     },
+    mounted() {
+      window.onscroll = () => {
+        this.changeColor();
+      };
+    },
+  
   };
 </script>
