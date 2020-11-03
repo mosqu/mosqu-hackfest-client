@@ -21,15 +21,8 @@
           flat
           class="white--text"
           style="text-decoration: none; background-color: inherit"
-          to="/home"
+          to="/"
           >Beranda</v-card
-        >
-        <v-card
-          flat
-          class="white--text"
-          style="text-decoration: none; background-color: inherit"
-          to="/home/about"
-          >Tentang</v-card
         >
         <v-card
           flat
@@ -44,17 +37,6 @@
           style="text-decoration: none; background-color: inherit"
           to="/home/masuk"
           >Masuk</v-card
-        >
-      </v-flex>
-
-      <v-flex class="ma-4 d-flex flex-column align-left">
-        <h3 class="teal--text text--lighten-4 mb-2">Cari</h3>
-        <v-card
-          flat
-          class="white--text"
-          style="text-decoration: none; background-color: inherit"
-          to="/cari/masjid"
-          >Cari Masjid</v-card
         >
       </v-flex>
 
