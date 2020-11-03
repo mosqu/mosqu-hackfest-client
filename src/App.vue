@@ -1,16 +1,16 @@
 <template>
   <v-app>
     <v-app-bar app color="white" flat>
-      <div v-if="$vuetify.breakpoint.smAndUp" class="d-flex align-center">
+      <div v-if="$vuetify.breakpoint.smAndUp" class="d-flex align-center text-no-wrap">
         <v-img
           alt="Vuetify Logo"
-          class="shrink mr-2"
+          class="shrink"
           contain
           :src="require('./assets/mosqu-logo.png')"
           transition="scale-transition"
           width="50"
         />
-        <div class="menu ml-10">
+        <div class="menu">
           <a href="/#home" style="text-decoration: none;">
             <v-btn text :ripple="true" exact>Beranda</v-btn>
           </a>
@@ -77,7 +77,7 @@
       </div>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer v-model="drawer" app temporary>
       <v-flex class="ma-2 d-flex" align-center>
         <v-img
           alt="Vuetify Logo"
@@ -90,11 +90,13 @@
       </v-flex>
       <v-list nav>
         <v-list-item-group>
-          <v-list-item to="/" exact> Beranda </v-list-item>
+          <v-list-item to="/#home" exact> Beranda </v-list-item>
 
-          <v-list-item to="#about"> Tentang </v-list-item>
+          <v-list-item to="/#about"> Tentang </v-list-item>
 
-          <v-list-item to="/cari/masjid"> Cari Masjid </v-list-item>
+          <v-list-item to="/#feature"> Fitur </v-list-item>
+
+          <v-list-item to="/#faq"> FAQ </v-list-item>
 
           <v-list-item to="/daftar"> Daftar </v-list-item>
 
