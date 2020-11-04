@@ -48,6 +48,7 @@
                 :src="require('../assets/illustration3.svg')"
                 max-height="560px"
                 contain
+                transition="scale-transition"
               />
           </v-col>
         </v-row>
