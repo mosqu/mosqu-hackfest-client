@@ -7,7 +7,6 @@
           class="shrink mr-2"
           contain
           :src="require('./assets/mosqu-logo.png')"
-          transition="scale-transition"
           width="50"
         />
         <div class="menu ml-10">
@@ -38,7 +37,6 @@
           class="mr-2 shrink align-self-center"
           contain
           :src="require('./assets/mosqu-logo.png')"
-          transition="scale-transition"
           width="50"
         />
         <h4>MOSQU</h4>
@@ -85,7 +83,6 @@
           class="mr-2 shrink align-self-center"
           contain
           :src="require('./assets/mosqu-logo.png')"
-          transition="scale-transition"
           width="50"
         />MOSQU
       </v-flex>
@@ -100,7 +97,7 @@
           </v-list-item>
 
           <v-list-item>
-            <a href="/#fitur" class="black--text" style="text-decoration: none;">Fitur</a>
+            <a href="/#feature" class="black--text" style="text-decoration: none;">Fitur</a>
           </v-list-item>
 
           <v-list-item>
@@ -110,7 +107,7 @@
           <v-list-item to="/cari/masjid">Cari Masjid</v-list-item>
 
           <v-list-item to="/#daftar">
-            <a href="/#daftar" class="black--text" style="text-decoration: none;">Daftar</a>
+            <a href="/#register" class="black--text" style="text-decoration: none;">Daftar</a>
           </v-list-item>
 
           <v-list-item to="/masuk">Masuk</v-list-item>
