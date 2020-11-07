@@ -42,7 +42,7 @@
                 </v-col>
                 <v-col sm="12" md="6" lg="6" class="pa-10" v-if="$vuetify.breakpoint.lgOnly">
                     <v-img
-                        :src="require('../assets/illustration4.svg')"
+                        :src="require('@/assets/illustration4.svg')"
                         contain
                         transition="scale-transition"
                       />
