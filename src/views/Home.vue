@@ -6,7 +6,7 @@
           <v-row no-gutters wrap align="start">
             <v-col sm="12" md="6" lg="4">
               <v-card flat>
-                <v-flex v-if="$route.name == 'Home'" align-self-center>
+                <v-flex align-self-center>
                   <div class="ma-2 display-1 font-weight-bold">Ingin Donasi di Masjid Anda lebih besar dan mudah?</div>
                   <div class="ma-2 subtitle-1">
                     Kami bisa membantu Anda. Urusan masjid jadi mudah! Platform pertama untuk digitalisasi
@@ -46,11 +46,11 @@
 </template>
 
 <script>
-  import HomeAbout from "../components/HomeAbout";
-  import HomeFeature from "../components/HomeFeature";
-  import HomeRegister from "../components/HomeRegister";
-  import HomeFAQ from "../components/HomeFAQ";
-  import HomeFooter from "../components/HomeFooter";
+  import HomeAbout from "../components/Home/HomeAbout";
+  import HomeFeature from "../components/Home/HomeFeature";
+  import HomeRegister from "../components/Home/HomeRegister";
+  import HomeFAQ from "../components/Home/HomeFAQ";
+  import HomeFooter from "../components/Home/HomeFooter";
 
   export default {
     components: {

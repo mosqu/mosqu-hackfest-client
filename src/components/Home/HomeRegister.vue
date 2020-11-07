@@ -27,7 +27,7 @@
                 </v-col>
                 <v-col sm="12" md="6" lg="6" class="pa-8">
                     <v-img
-                        :src="require('../assets/illustration1.svg')"
+                        :src="require('@/assets/illustration1.svg')"
                         contain
                         transition="scale-transition"
                       />

@@ -9,7 +9,7 @@
           <v-col md="6" lg="3">
             <v-card class="mx-auto mb-8" max-width="300" elevation="0" tile>
               <v-img
-                :src="require('../assets/order.png')"
+                :src="require('@/assets/order.png')"
                 max-height="150px"
                 contain
                 transition="scale-transition"
@@ -26,7 +26,7 @@
           <v-col md="6" lg="3">
             <v-card class="mx-auto mb-8" max-width="300" elevation="0" tile>
               <v-img
-                :src="require('../assets/pack.png')"
+                :src="require('@/assets/pack.png')"
                 max-height="150px"
                 contain
                 transition="scale-transition"
@@ -43,7 +43,7 @@
           <v-col md="6" lg="3">
             <v-card class="mx-auto mb-8" max-width="300" elevation="0" tile>
               <v-img
-                :src="require('../assets/jigsaw.png')"
+                :src="require('@/assets/jigsaw.png')"
                 max-height="150px"
                 contain
                 transition="scale-transition"
@@ -60,7 +60,7 @@
           <v-col md="6" lg="3">
             <v-card class="mx-auto mb-8" max-width="300" elevation="0" tile>
               <v-img
-                :src="require('../assets/contract.png')"
+                :src="require('@/assets/contract.png')"
                 max-height="150px"
                 contain
                 transition="scale-transition"
