@@ -4,15 +4,17 @@
       class="my-4 mx-auto"
       wrap
       hover
+      outlined
       width="300"
-      :elevation="hover ? 16 : 2"
+      :elevation="hover ? 6 : 0"
       :to="{ path: '/detail/masjid/' + masjid.masjid_uid }"
+      height="380"
     >
       <v-img
         class="white--text align-end"
         height="200px"
-        :src="timeout ? require('../assets/mosque-noimage.png') : masjid.imgUrl"
-        contain
+        :src="masjid.images.length > 0 ? masjid.images[0].url : require('../assets/mosque-noimage.png')"
+        :lazy-src="require('../assets/mosque-noimage.png')"
       >
         <template v-slot:placeholder>
           <v-row class="fill-height ma-0" align="center" justify="center">
@@ -49,12 +51,12 @@ export default {
     };
   },
   props: ["masjid"],
-  mounted() {
-    setTimeout(() => {
-      if (!this.masjid.imgUrl) {
-        this.timeout = true;
-      }
-    }, 3000);
-  },
+  // mounted() {
+  //   setTimeout(() => {
+  //     if (!this.masjid.imgUrl) {
+  //       this.timeout = true;
+  //     }
+  //   }, 3000);
+  // },
 };
 </script>

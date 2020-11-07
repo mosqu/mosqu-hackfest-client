@@ -1,9 +1,51 @@
 <template>
-  <v-row no-gutters>
-    <v-col v-for="event in events" :key="event.id" lg="4" md="6" xs="12">
-      <CardEvent v-bind:event="event"></CardEvent>
-    </v-col>
-  </v-row>
+  <div class="content pa-lg-16 pa-8">
+    <div class="display-1 mb-8 font-weight-bold">Cari {{$route.name.substring(4)}}</div>
+    <div class="search">
+      <v-text-field
+        label="Cari berdasarkan nama"
+        outlined
+        clearable
+        single-line
+        append-icon="mdi-magnify"
+        @change="filter"
+      ></v-text-field>
+    </div>
+    <v-row v-if="!isError" no-gutters wrap>
+      <v-col v-if="isLoading" lg="4" md="6" sm="12">
+        <v-skeleton-loader
+          class="mx-auto"
+          max-width="300"
+          type="card"
+        ></v-skeleton-loader>
+      </v-col>
+      <v-col v-if="isLoading" lg="4" md="6" sm="12">
+        <v-skeleton-loader
+          class="mx-auto"
+          max-width="300"
+          type="card"
+        ></v-skeleton-loader>
+      </v-col>
+      <v-col v-if="isLoading" lg="4" md="6" sm="12">
+        <v-skeleton-loader
+          class="mx-auto"
+          max-width="300"
+          type="card"
+        ></v-skeleton-loader>
+      </v-col>
+      <div class="d-flex flex-wrap" v-if="isNotEmpty">
+        <CardEvent class="mr-6" v-for="event in events" :key="event._id" v-bind:event="event"></CardEvent>
+      </div>
+      <div v-else>
+        <p class="subtitle-1 font-italic text-center">Masjid tidak ditemukan</p>
+      </div>
+    </v-row>
+    <v-row v-else >
+      <v-col align="center">
+        <div>Maaf terjadi kesalahan dalam pengambilan data</div>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -11,60 +53,47 @@
 import CardEvent from "@/components/CardEvent.vue";
 
 export default {
-  name: "Home",
   components: {
     CardEvent,
   },
   data() {
     return {
       isLoading: true,
-      events: [
-        {
-          id: "E0001",
-          title: "Kajian Jelang Berbuka",
-          schedule: "24 Oktober 2020",
-          imgUrl: "https://i.ytimg.com/vi/sYlx12WmO28/maxresdefault.jpg",
-          masjid: {
-            id: "M0002",
-            name: "Masjid An-Nur",
-            city: "Bandung",
-            address: "Jl. Maju Terus",
-            imgUrl:
-              "https://3.bp.blogspot.com/-lLKCuXXrlyU/Wcm75wzz53I/AAAAAAAAfbA/1xyTsGcVqB4Lqrxli6c2xm3m2PK8a04zwCLcBGAs/s1600/MA%2BKota%2BTegal%2B%25287%2529.jpg",
-          },
-        },
-        {
-          id: "E0002",
-          title: "Kajian Senin Kamis",
-          schedule: "20 Oktober 2020",
-          imgUrl:
-            "https://kamilpasca.itb.ac.id/wp-content/uploads/20160417145631-300x300.jpg",
-          masjid: {
-            id: "M0002",
-            name: "Masjid An-Nur",
-            city: "Bandung",
-            address: "Jl. Maju Terus",
-            imgUrl:
-              "https://3.bp.blogspot.com/-lLKCuXXrlyU/Wcm75wzz53I/AAAAAAAAfbA/1xyTsGcVqB4Lqrxli6c2xm3m2PK8a04zwCLcBGAs/s1600/MA%2BKota%2BTegal%2B%25287%2529.jpg",
-          },
-        },
-        {
-          id: "E0003",
-          title: "Kajian Pernikahan",
-          schedule: "15 November 2020",
-          imgUrl:
-            "https://scontent-xsp1-1.xx.fbcdn.net/v/t1.0-9/84284593_181278186560816_2010533818288570368_o.jpg?_nc_cat=109&_nc_sid=9267fe&_nc_eui2=AeFv7V2Snp9aCZw_9cuQRnDK4VntNBHS6CvhWe00EdLoK9tgIPAabvwVl7zN6gNRnAuYOlo3JfOqEF7G8ErleNLy&_nc_ohc=1bpz4qS1jEIAX-lPOju&_nc_ht=scontent-xsp1-1.xx&oh=594949616098cfa705d96e71d1101b9f&oe=5FA48827",
-          masjid: {
-            id: "M0002",
-            name: "Masjid An-Nur",
-            city: "Bandung",
-            address: "Jl. Maju Terus",
-            imgUrl:
-              "https://3.bp.blogspot.com/-lLKCuXXrlyU/Wcm75wzz53I/AAAAAAAAfbA/1xyTsGcVqB4Lqrxli6c2xm3m2PK8a04zwCLcBGAs/s1600/MA%2BKota%2BTegal%2B%25287%2529.jpg",
-          },
-        },
-      ],
+      events: [],
+      isError: false,
+      isNotEmpty: true
     };
   },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    filter: function(search) {
+      this.getData(search);
+    },
+    getData: function(name) {
+      this.isLoading = true;
+      this.isError = false;
+      this.axios(`program/list?name=${name ? name : ''}`)
+        .then((response) => {
+          this.events = response.data.data;
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          this.isLoading = false;
+          this.isError = true;
+          console.log(error);
+        });
+    }
+  },
+  watch: {
+    events: function(val) {
+      if (val.length > 0 ) {
+        this.isNotEmpty = true;
+      } else {
+        this.isNotEmpty = false;
+      }
+    }
+  }
 };
 </script>
