@@ -56,7 +56,7 @@ export default new Vuex.Store({
                 console.log(resp.data);
                 var payload = { token: token, username: name };
                 commit("auth_success", payload);
-                router.push("/home");
+                router.push("/");
                 resolve(resp);
               } else {
                 console.log(resp.data);
@@ -97,7 +97,7 @@ export default new Vuex.Store({
         localStorage.removeItem("user");
         localStorage.removeItem("username");
         delete axios.defaults.headers.common["Authorization"];
-        router.push("/home/masuk");
+        router.push("/masuk");
         resolve();
       });
     },

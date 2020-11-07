@@ -8,7 +8,7 @@
           alt="MosQu Logo"
           class="shrink"
           contain
-          :src="require('../assets/mosqu-logo.png')"
+          :src="require('@/assets/mosqu-logo.png')"
           transition="scale-transition"
           width="60"
         />
