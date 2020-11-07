@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app :color="bg" flat>
-      <div v-if="$vuetify.breakpoint.smAndUp" class="d-flex align-center">
+      <div v-if="$vuetify.breakpoint.mdAndUp" class="d-flex align-center">
         <v-img
           alt="MOSQU Logo"
           class="shrink mr-2"
@@ -23,7 +23,7 @@
             <v-btn text :ripple="true">FAQ</v-btn>
           </a>
           <v-btn text :ripple="true" to="/cari/masjid">Cari Masjid</v-btn>
-          <v-btn text :ripple="true" to="/cari/event">Cari Event</v-btn>
+          <v-btn text :ripple="true" to="/cari/program">Cari Program</v-btn>
         </div>
       </div>
 
@@ -32,7 +32,7 @@
         @click.stop="drawer = !drawer"
       />
 
-      <v-flex v-if="$vuetify.breakpoint.xsOnly" class="d-flex" align-center>
+      <v-flex v-if="$vuetify.breakpoint.smAndDown" class="d-flex" align-center>
         <v-img
           alt="MosQu Logo"
           class="mr-2 shrink align-self-center"
@@ -108,7 +108,7 @@
 
           <v-list-item to="/cari/masjid">Cari Masjid</v-list-item>
 
-          <v-list-item to="/cari/event">Cari Event</v-list-item>
+          <v-list-item to="/cari/program">Cari program</v-list-item>
 
           <v-list-item to="/#daftar">
             <a href="/#register" class="black--text" style="text-decoration: none;">Daftar</a>

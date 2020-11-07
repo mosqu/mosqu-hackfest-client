@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-container fluid pa-0 class="teal fill-height">
+    <v-container fluid pa-0 class="secondary darken-2 fill-height">
         <v-flex
-        class="my-4 mr-4 d-flex align-self-center flex-column align-center"
+        class="my-10 mr-4 d-flex align-self-center flex-column align-center"
       >
         <v-img
           alt="MosQu Logo"

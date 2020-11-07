@@ -6,6 +6,7 @@ import axios from 'axios'
 import Vuelidate from 'vuelidate'
 import Vuex from 'vuex'
 import store from './store/auth'
+import VueMoment from 'vue-moment'
 
 axios.defaults.baseURL = 'https://mosqu-service.herokuapp.com'
 Vue.prototype.axios = axios
@@ -13,6 +14,11 @@ Vue.prototype.axios = axios
 Vue.config.productionTip = false
 Vue.use(Vuelidate)
 Vue.use(Vuex)
+
+var moment = require('moment')
+moment.locale('id')
+
+Vue.use(VueMoment, { moment })
 
 new Vue({
   router,

@@ -13,5 +13,5 @@ export default new Vuetify({
         accent: colors.deepOrange.base, // #FF7043
       },
     },
-  }
+  },
 });
