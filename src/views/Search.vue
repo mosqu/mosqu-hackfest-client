@@ -1,7 +1,8 @@
 <template>
-  <v-container>
-    <h1>Cari {{$route.name.substring(4)}}</h1>
+  <v-container fluid pa-0>
+    <h1 class="ma-8">Cari {{ $route.name.substring(4) }}</h1>
     <v-text-field
+      class="mx-8"
       label="Cari"
       v-model="search"
       outlined
@@ -11,20 +12,27 @@
       @click:append="filter"
     ></v-text-field>
     <router-view />
+
+    <section class="mt-16" id="footer">
+      <HomeFooter />
+    </section>
   </v-container>
 </template>
 
 <script>
+import HomeFooter from "../components/HomeFooter";
+
 export default {
-  data(){
-    return{
-      search: ''
-    }
+  components: {
+    HomeFooter
+  },
+  data() {
+    return {
+      search: "",
+    };
   },
   methods: {
-    filter: function(){
-      
-    }
-  }
-}
+    filter: function () {},
+  },
+};
 </script>

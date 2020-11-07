@@ -21,8 +21,8 @@
         type="card"
       ></v-skeleton-loader>
     </v-col>
-    <v-col v-for="(masjid, i) in masjids" :key="i" lg="4" md="6" sm="12">
-      <CardMasjid v-bind:masjid="masjid"></CardMasjid>
+    <v-col v-for="(program, i) in programs" :key="i" lg="4" md="6" sm="12">
+      <CardProgram v-bind:program="program"></CardProgram>
     </v-col>
   </v-row>
   <v-row v-else >
@@ -34,25 +34,25 @@
 
 <script>
 // @ is an alias to /src
-import CardMasjid from "@/components/CardMasjid.vue";
+import CardProgram from "@/components/CardProgram.vue";
 
 export default {
   name: "Home",
   components: {
-    CardMasjid,
+    CardProgram,
   },
   data() {
     return {
-      masjids: [],
+      programs: [],
       isLoading: true,
       isError: false
     };
   },
   mounted() {
-    this.axios('masjid/list')
+    this.axios('program/list')
       .then((response) => {
         console.log(response.data);
-        this.masjids = response.data.data;
+        this.programs = response.data.data;
         this.isLoading = false;
       })
       .catch((error) => {

@@ -3,10 +3,10 @@ import VueRouter from 'vue-router'
 
 import Search from '../views/Search.vue'
 import CariMasjid from '../components/CariMasjid.vue'
-import CariEvent from '../components/CariEvent.vue'
+import CariProgram from '../components/CariProgram.vue'
 
 import Detail from '../views/Detail.vue'
-import DetailEvent from '../components/DetailEvent.vue'
+import DetailProgram from '../components/DetailProgram.vue'
 import DetailMasjid from '../components/DetailMasjid.vue'
 
 import Home from '../views/Home.vue'
@@ -45,9 +45,9 @@ const routes = [
         component: CariMasjid
       },
       {
-        path: 'event',
-        name: 'CariEvent',
-        component: CariEvent
+        path: 'program',
+        name: 'CariProgram',
+        component: CariProgram
       }
     ]
   },
@@ -64,9 +64,10 @@ const routes = [
         props: true
       },
       {
-        path: 'event',
-        name: 'DetailEvent',
-        component: DetailEvent
+        path: 'program/:masjid_program_uid',
+        name: 'DetailProgram',
+        component: DetailProgram,
+        props: true
       }
     ]
   },

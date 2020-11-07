@@ -9,7 +9,7 @@
           :src="require('./assets/mosqu-logo.png')"
           width="50"
         />
-        <div class="menu ml-10">
+        <div class="menu text-no-wrap">
           <a href="/#home" style="text-decoration: none;">
             <v-btn text :ripple="true" exact>Beranda</v-btn>
           </a>
