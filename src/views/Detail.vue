@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import HomeFooter from "../components/HomeFooter";
+  import HomeFooter from "../components/Home/HomeFooter";
 
   export default {
     components: {

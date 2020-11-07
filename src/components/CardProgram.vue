@@ -4,12 +4,14 @@
       class="my-4 mx-auto"
       wrap
       hover
+      outlined
       width="300"
-      :elevation="hover ? 16 : 2"
+      :elevation="hover ? 6 : 0"
       :to="{ path: '/detail/program/' + program.masjid_program_uid }"
+      height="380"
     >
       <v-carousel
-        v-if="program.images.length"
+        v-if="program.images && program.images.length"
         cycle
         interval="4000"
         hide-delimiters
@@ -69,11 +71,11 @@
 </template>
 
 <script>
-import VClamp from 'vue-clamp'
+import VClamp from "vue-clamp";
 
 export default {
   components: {
-    VClamp
+    VClamp,
   },
   data() {
     return {
