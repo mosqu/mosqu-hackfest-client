@@ -23,6 +23,7 @@
             <v-btn text :ripple="true">FAQ</v-btn>
           </a>
           <v-btn text :ripple="true" to="/cari/masjid">Cari Masjid</v-btn>
+          <v-btn text :ripple="true" to="/cari/event">Cari Event</v-btn>
         </div>
       </div>
 
@@ -105,6 +106,8 @@
           </v-list-item>
 
           <v-list-item to="/cari/masjid">Cari Masjid</v-list-item>
+
+          <v-list-item to="/cari/event">Cari Event</v-list-item>
 
           <v-list-item to="/#daftar">
             <a href="/#register" class="black--text" style="text-decoration: none;">Daftar</a>
