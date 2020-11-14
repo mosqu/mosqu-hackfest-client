@@ -40,12 +40,12 @@
           :src="require('@/assets/mosqu-logo.png')"
           width="50"
         />
-        <h4>MOSQU</h4>
+        <h3>MosQu</h3>
       </v-flex>
 
       <v-spacer></v-spacer>
 
-      <a href="/#register" style="text-decoration: none;">
+      <a href="https://bit.ly/PendaftaranMosqu" style="text-decoration: none;">
         <v-card
           class="px-4 text-button"
           v-if="!this.$store.getters.isLoggedIn && $vuetify.breakpoint.smAndUp"
@@ -111,7 +111,7 @@
           <v-list-item to="/cari/program">Cari program</v-list-item>
 
           <v-list-item to="/#daftar">
-            <a href="/#register" class="black--text" style="text-decoration: none;">Daftar</a>
+            <a href="https://bit.ly/PendaftaranMosqu" class="black--text" style="text-decoration: none;">Daftar</a>
           </v-list-item>
 
           <v-list-item to="/masuk">Masuk</v-list-item>

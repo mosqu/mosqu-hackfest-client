@@ -1,103 +1,138 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-import Search from '../views/Search.vue';
-import CariMasjid from '../components/CariMasjid.vue';
-import CariProgram from '../components/CariProgram.vue';
+import Main from "../views/Main.vue";
 
-import Detail from '../views/Detail.vue';
-import DetailProgram from '../components/DetailProgram.vue';
-import DetailMasjid from '../components/DetailMasjid.vue';
+import Search from "../views/Search.vue";
+import CariMasjid from "../components/CariMasjid.vue";
+import CariProgram from "../components/CariProgram.vue";
 
-import Home from '../views/Home.vue';
-import SignIn from '../components/SignIn.vue';
-import SignUp from '../components/SignUp.vue';
+import Detail from "../views/Detail.vue";
+import DetailProgram from "../components/DetailProgram.vue";
+import DetailMasjid from "../components/DetailMasjid.vue";
 
-import Main from '../views/Main.vue';
-import Admin from '../views/Admin.vue';
+import Home from "../views/Home.vue";
+import SignIn from "../components/SignIn.vue";
+import SignUp from "../components/SignUp.vue";
 
-import ErrorPage from '../views/Error.vue'
+import Admin from "../views/Admin.vue";
+import AdminHome from "../components/Admin/AdminHome.vue";
+import AdminJamaah from "../components/Admin/AdminJamaah.vue";
+import AdminJamaahSubmit from "../components/Admin/AdminJamaahSubmit.vue";
+import AdminKeuangan from "../components/Admin/AdminKeuangan.vue";
+import AdminKegiatan from "../components/Admin/AdminKegiatan.vue";
 
-Vue.use(VueRouter)
+import ErrorPage from "../views/Error.vue";
+
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Main,
-    redirect: '/',
     children: [
-        {
-          path: '/',
-          name: 'LandingPage',
-          component: Home
-        },
-        {
-          path: '/daftar',
-          name: 'Daftar',
-          component: SignUp
-        },
-        {
-          path: '/masuk',
-          name: 'Masuk',
-          component: SignIn
-        },
-        {
-          path: '/cari',
-          name: 'Cari',
-          redirect: '/cari/masjid',
-          component: Search,
-          children: [
-            {
-              path: 'masjid',
-              name: 'CariMasjid',
-              component: CariMasjid
-            },
-            {
-              path: 'program',
-              name: 'CariProgram',
-              component: CariProgram
-            }
-          ]
-        },
-        {
-          path: '/detail',
-          name: 'detail',
-          redirect: '/home',
-          component: Detail,
-          children: [
-            {
-              path: 'masjid/:masjid_uid',
-              name: 'DetailMasjid',
-              component: DetailMasjid,
-              props: true
-            },
-            {
-              path: 'program/:masjid_program_uid',
-              name: 'DetailProgram',
-              component: DetailProgram,
-              props: true
-            }
-          ]
-        },
-    ]
+      {
+        path: "/",
+        name: "LandingPage",
+        component: Home,
+      },
+      {
+        path: "/daftar",
+        name: "Daftar",
+        component: SignUp,
+      },
+      {
+        path: "/masuk",
+        name: "Masuk",
+        component: SignIn,
+      },
+      {
+        path: "/cari",
+        name: "Cari",
+        redirect: "/cari/masjid",
+        component: Search,
+        children: [
+          {
+            path: "masjid",
+            name: "CariMasjid",
+            component: CariMasjid,
+          },
+          {
+            path: "program",
+            name: "CariProgram",
+            component: CariProgram,
+          },
+        ],
+      },
+      {
+        path: "/detail",
+        name: "detail",
+        redirect: "/home",
+        component: Detail,
+        children: [
+          {
+            path: "masjid/:masjid_uid",
+            name: "DetailMasjid",
+            component: DetailMasjid,
+            props: true,
+          },
+          {
+            path: "program/:masjid_program_uid",
+            name: "DetailProgram",
+            component: DetailProgram,
+            props: true,
+          },
+        ],
+      },
+    ],
   },
   {
-    path: '*',
-    component: ErrorPage
+    path: "*",
+    component: ErrorPage,
   },
   {
-    path: '/admin',
-    name: 'Admin',
+    path: "/admin",
+    name: "Admin",
     component: Admin,
-    children: []
+    redirect: "/admin/home",
+    children: [
+      {
+        path: "home",
+        name: "Beranda",
+        component: AdminHome,
+      },
+      {
+        path: "jamaah",
+        name: "Jamaah",
+        component: AdminJamaah,
+        redirect: "/admin/jamaah/submit",
+        children: [
+          {
+            path: "submit",
+            name: "Submit Data Jamaah",
+            component: AdminJamaahSubmit,
+          },
+        ],
+      },
+      {
+        path: "keuangan",
+        name: "Keuangan",
+        component: AdminKeuangan,
+      },
+      {
+        path: "kegiatan",
+        name: "Kegiatan",
+        component: AdminKegiatan,
+      },
+    ],
   },
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
