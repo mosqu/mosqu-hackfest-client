@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app flat>
-      <div v-if="$vuetify.breakpoint.smAndUp" class="d-flex align-center">
+      <div class="d-flex align-center">
         <v-img
           alt="MOSQU Logo"
           class="shrink mr-2"
@@ -9,115 +9,115 @@
           :src="require('@/assets/mosqu-logo.png')"
           width="50"
         />
-        <div class="menu ml-10">
-          <a href="/#home" style="text-decoration: none;">
-            <v-btn text :ripple="true" exact>Beranda</v-btn>
-          </a>
-        </div>
+        {{ $route.name }}
       </div>
-
-      <v-app-bar-nav-icon
-        v-else
-        @click.stop="drawer = !drawer"
-      />
-
-      <v-flex v-if="$vuetify.breakpoint.xsOnly" class="d-flex" align-center>
-        <v-img
-          alt="MosQu Logo"
-          class="mr-2 shrink align-self-center"
-          contain
-          :src="require('@/assets/mosqu-logo.png')"
-          width="50"
-        />
-        <h4>MOSQU</h4>
-      </v-flex>
 
       <v-spacer></v-spacer>
-
-      <a href="/#register" style="text-decoration: none;">
-        <v-card
-          class="px-4 text-button"
-          v-if="!this.$store.getters.isLoggedIn && $vuetify.breakpoint.smAndUp"
-          color="teal white--text"
-          :ripple="true"
-          style="text-decoration: none; background-color: inherit"
-          elevation="0"
-          >DAFTAR</v-card
-        >
-      </a>
-      <v-card
-        flat
-        class="px-4 text-button"
-        v-if="!this.$store.getters.isLoggedIn && $vuetify.breakpoint.smAndUp"
-        text
-        color="grey--text text--darken-2"
-        :ripple="true"
-        style="text-decoration: none; background-color: inherit"
-        to="/masuk"
-        >MASUK</v-card
-      >
-
-      <div v-if="this.$store.getters.isLoggedIn">
-        Selamat datang,
-        <span style="font-weight: bold">
-          {{ this.$store.getters.getUser }}
-        </span>
-        <v-icon @click="logout">mdi-logout</v-icon>
-      </div>
     </v-app-bar>
-    <v-navigation-drawer permanent>
-      <v-list-item>
+
+    <v-navigation-drawer app :mini-variant.sync="mini" permanent :width="320">
+      <v-list-item class="px-2">
+        <v-list-item-avatar>
+          <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
+        </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="title">
-            Application
+            {{ this.$store.getters.getUser }}
           </v-list-item-title>
-          <v-list-item-subtitle>
-            subtext
-          </v-list-item-subtitle>
+          <v-list-item-subtitle> Masjid Nurul Huda </v-list-item-subtitle>
         </v-list-item-content>
+        <v-btn icon @click.stop="mini = !mini">
+          <v-icon>mdi-chevron-left</v-icon>
+        </v-btn>
       </v-list-item>
 
       <v-divider></v-divider>
 
-      <v-list
-        dense
-        nav
-      >
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
-        >
+      <v-list nav>
+        <v-list-item to="/admin/home">
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>Beranda</v-list-item-title>
         </v-list-item>
+        <v-list-group
+          v-for="item in items.slice(1)"
+          :key="item.title"
+          :to="item.link"
+          link
+          :prepend-icon="item.icon"
+          no-action
+          ><template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title"></v-list-item-title>
+            </v-list-item-content>
+          </template>
+
+          <v-list-item link v-for="child in item.childs" :key="child.title">
+            <v-list-item-content>
+              <v-list-item-title v-text="child.title"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
       </v-list>
+
+      <v-divider></v-divider>
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-btn @click="logout" color="primary" block> Logout </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
 
     <v-main>
-        <v-container fluid>
-            <router-view></router-view>
-        </v-container>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
     </v-main>
-
   </v-app>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        items: [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-          { title: 'Account', icon: 'mdi-account-box' },
-          { title: 'Admin', icon: 'mdi-gavel' },
-        ],
-      }
+export default {
+  data() {
+    return {
+      items: [
+        {
+          title: "Beranda",
+          icon: "mdi-view-dashboard",
+          link: "/admin/home",
+          childs: [],
+        },
+        {
+          title: "Jamaah",
+          icon: "mdi-account-box",
+          link: "/admin/jamaah",
+          childs: [
+            { title: "Submit Data Jamaah", link: "" },
+            { title: "Lihat Data Jamaah", link: "" },
+            { title: "Lihat Statistik Jamaah", link: "" },
+          ],
+        },
+        {
+          title: "Keuangan",
+          icon: "mdi-cart",
+          link: "/admin/keuangan",
+          childs: [],
+        },
+        {
+          title: "Kegiatan",
+          icon: "mdi-calendar",
+          link: "/admin/kegiatan",
+          childs: [],
+        },
+      ],
+      mini: false,
+    };
+  },
+  methods: {
+    logout: function () {
+      this.$store.dispatch("logout");
     },
-  }
+  },
+};
 </script>

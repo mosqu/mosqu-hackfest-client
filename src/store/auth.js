@@ -56,7 +56,7 @@ export default new Vuex.Store({
                 console.log(resp.data);
                 var payload = { token: token, username: name };
                 commit("auth_success", payload);
-                router.push("/");
+                router.push("/admin");
                 resolve(resp);
               } else {
                 console.log(resp.data);
