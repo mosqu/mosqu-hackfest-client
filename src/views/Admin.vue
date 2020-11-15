@@ -53,7 +53,7 @@
             </v-list-item-content>
           </template>
 
-          <v-list-item link v-for="child in item.childs" :key="child.title">
+          <v-list-item link v-for="child in item.childs" :key="child.title" :to="child.link">
             <v-list-item-content>
               <v-list-item-title v-text="child.title"></v-list-item-title>
             </v-list-item-content>
@@ -93,8 +93,8 @@ export default {
           icon: "mdi-account-box",
           link: "/admin/jamaah",
           childs: [
-            { title: "Submit Data Jamaah", link: "" },
-            { title: "Lihat Data Jamaah", link: "" },
+            { title: "Submit Data Jamaah", link: "/admin/jamaah/submit" },
+            { title: "Lihat Data Jamaah", link: "/admin/jamaah/list" },
             { title: "Lihat Statistik Jamaah", link: "" },
           ],
         },

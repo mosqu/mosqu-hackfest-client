@@ -19,6 +19,7 @@ import Admin from "../views/Admin.vue";
 import AdminHome from "../components/Admin/AdminHome.vue";
 import AdminJamaah from "../components/Admin/AdminJamaah.vue";
 import AdminJamaahSubmit from "../components/Admin/AdminJamaahSubmit.vue";
+import AdminJamaahList from "../components/Admin/AdminJamaahList.vue";
 import AdminKeuangan from "../components/Admin/AdminKeuangan.vue";
 import AdminKegiatan from "../components/Admin/AdminKegiatan.vue";
 
@@ -112,6 +113,11 @@ const routes = [
             path: "submit",
             name: "Submit Data Jamaah",
             component: AdminJamaahSubmit,
+          },
+          {
+            path: "list",
+            name: "List Data Jamaah",
+            component: AdminJamaahList,
           },
         ],
       },
