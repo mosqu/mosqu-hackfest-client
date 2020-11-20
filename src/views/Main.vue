@@ -81,12 +81,12 @@
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-flex class="ma-2 d-flex" align-center>
         <v-img
-          alt="Vuetify Logo"
+          alt="MosQu Logo"
           class="mr-2 shrink align-self-center"
           contain
           :src="require('@/assets/mosqu-logo.png')"
           width="50"
-        />MOSQU
+        />MosQu
       </v-flex>
       <v-list nav>
         <v-list-item-group>

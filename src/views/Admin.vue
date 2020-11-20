@@ -1,6 +1,10 @@
 <template>
   <v-app>
     <v-app-bar app flat>
+      <v-app-bar-nav-icon
+        v-if="$vuetify.breakpoint.smAndDown"
+        @click="drawer = !drawer"
+      />
       <div class="d-flex align-center">
         <v-img
           alt="MOSQU Logo"
@@ -15,7 +19,13 @@
       <v-spacer></v-spacer>
     </v-app-bar>
 
-    <v-navigation-drawer app :mini-variant.sync="mini" permanent :width="320">
+    <v-navigation-drawer
+      app
+      v-model="drawer"
+      :mini-variant.sync="mini"
+      :permanent="!$vuetify.breakpoint.smAndDown"
+      :width="320"
+    >
       <v-list-item class="px-2">
         <v-list-item-avatar>
           <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
@@ -53,7 +63,12 @@
             </v-list-item-content>
           </template>
 
-          <v-list-item link v-for="child in item.childs" :key="child.title">
+          <v-list-item
+            link
+            v-for="child in item.childs"
+            :key="child.title"
+            :to="child.link"
+          >
             <v-list-item-content>
               <v-list-item-title v-text="child.title"></v-list-item-title>
             </v-list-item-content>
@@ -63,9 +78,13 @@
 
       <v-divider></v-divider>
       <template v-slot:append>
-        <div class="pa-2">
-          <v-btn @click="logout" color="primary" block> Logout </v-btn>
-        </div>
+        <v-list-item link @click="logout">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Logout</v-list-item-title>
+        </v-list-item>
+        <div class="pa-2"></div>
       </template>
     </v-navigation-drawer>
 
@@ -81,6 +100,7 @@
 export default {
   data() {
     return {
+      drawer: false,
       items: [
         {
           title: "Beranda",
@@ -93,8 +113,8 @@ export default {
           icon: "mdi-account-box",
           link: "/admin/jamaah",
           childs: [
-            { title: "Submit Data Jamaah", link: "" },
-            { title: "Lihat Data Jamaah", link: "" },
+            { title: "Submit Data Jamaah", link: "/admin/jamaah/submit" },
+            { title: "Lihat Data Jamaah", link: "/admin/jamaah/list" },
             { title: "Lihat Statistik Jamaah", link: "" },
           ],
         },

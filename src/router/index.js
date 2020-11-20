@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from '../store/auth'
 
 import Main from "../views/Main.vue";
 
@@ -19,6 +20,7 @@ import Admin from "../views/Admin.vue";
 import AdminHome from "../components/Admin/AdminHome.vue";
 import AdminJamaah from "../components/Admin/AdminJamaah.vue";
 import AdminJamaahSubmit from "../components/Admin/AdminJamaahSubmit.vue";
+import AdminJamaahList from "../components/Admin/AdminJamaahList.vue";
 import AdminKeuangan from "../components/Admin/AdminKeuangan.vue";
 import AdminKegiatan from "../components/Admin/AdminKegiatan.vue";
 
@@ -96,6 +98,7 @@ const routes = [
     name: "Admin",
     component: Admin,
     redirect: "/admin/home",
+    meta: { requiresAuth: true },
     children: [
       {
         path: "home",
@@ -112,6 +115,11 @@ const routes = [
             path: "submit",
             name: "Submit Data Jamaah",
             component: AdminJamaahSubmit,
+          },
+          {
+            path: "list",
+            name: "List Data Jamaah",
+            component: AdminJamaahList,
           },
         ],
       },
@@ -134,5 +142,17 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/masuk')
+  } else {
+    next()
+  }
+})
 
 export default router;
