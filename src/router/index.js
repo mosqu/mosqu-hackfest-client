@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from '../store/auth'
 
 import Main from "../views/Main.vue";
 
@@ -97,6 +98,7 @@ const routes = [
     name: "Admin",
     component: Admin,
     redirect: "/admin/home",
+    meta: { requiresAuth: true },
     children: [
       {
         path: "home",
@@ -140,5 +142,17 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/masuk')
+  } else {
+    next()
+  }
+})
 
 export default router;

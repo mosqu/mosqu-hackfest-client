@@ -12,6 +12,9 @@ export default new Vuetify({
         secondary: colors.teal.base, // #009688
         accent: colors.deepOrange.base, // #FF7043
       },
+      breakpoint: {
+        mobileBreakpoint: '960' // This is equivalent to a value of 960
+      },
     },
   },
 });
