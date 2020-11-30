@@ -132,7 +132,7 @@ export default {
           childs: [
             { title: "Submit Data Jamaah", link: "/admin/jamaah/submit" },
             { title: "Lihat Data Jamaah", link: "/admin/jamaah/list" },
-            { title: "Lihat Statistik Jamaah", link: "" },
+            { title: "Lihat Statistik Jamaah", link: "/admin/jamaah/statistik" },
           ],
         },
         {
