@@ -12,7 +12,7 @@ export default new Vuex.Store({
     status: localStorage.getItem("status") || "",
     token: localStorage.getItem("token") || "",
     user: localStorage.getItem("user") || "",
-    username: localStorage.getItem("username") || "",
+    masjid: localStorage.getItem("masjid") || "",
   },
   mutations: {
     auth_request(state) {
@@ -22,7 +22,7 @@ export default new Vuex.Store({
       state.status = "success";
       state.token = payload.token;
       state.user = payload.username;
-      state.username = "username";
+      state.masjid = payload.masjid;
     },
     auth_error(state) {
       state.status = "error";
@@ -49,41 +49,50 @@ export default new Vuex.Store({
                 localStorage.setItem("status", "success");
                 localStorage.setItem("token", token);
                 localStorage.setItem("user", name);
-                localStorage.setItem("username", "username");
                 // Add to axios header:
                 axios.defaults.headers.common["Authorization"] = token;
                 console.log("login success");
-                console.log(resp.data);
-                var payload = { token: token, username: name };
-                commit("auth_success", payload);
-                router.push("/admin");
-                resolve(resp);
+                // Get masjid data
+                var masjidData = "";
+                axios.get("/meta_").then(resp => {
+                  var dataMasjid = resp.data.masjid;
+                  for(var masjid of dataMasjid){
+                    masjidData += masjid.masjid_uid.toString() + ";";
+                  }
+                  localStorage.setItem("masjid", masjidData);
+                
+                  var payload = { token: token, username: name , masjid: masjidData};
+                  commit("auth_success", payload);
+                  router.push("/admin");
+                  resolve(resp);
+                }).catch(err => {
+                  console.log("Can't get metadata, error: " + err);
+                  reject(err)
+                })
+
               } else {
-                console.log(resp.data);
                 commit("auth_error");
                 localStorage.removeItem("status");
                 localStorage.removeItem("token");
                 localStorage.removeItem("user");
-                localStorage.removeItem("username");
-                resolve(resp);
+                localStorage.removeItem("masjid");
+                reject(resp);
               }
             } catch (e) {
-              console.log(e);
               commit("auth_error");
               localStorage.removeItem("status");
               localStorage.removeItem("token");
               localStorage.removeItem("user");
-              localStorage.removeItem("username");
+              localStorage.removeItem("masjid");
               reject(e);
             }
           })
           .catch((err) => {
-            console.log(err);
             commit("auth_error");
             localStorage.removeItem("status");
             localStorage.removeItem("token");
             localStorage.removeItem("user");
-            localStorage.removeItem("username");
+            localStorage.removeItem("masjid");
             reject(err);
           });
       });
@@ -95,7 +104,7 @@ export default new Vuex.Store({
         localStorage.removeItem("status");
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        localStorage.removeItem("username");
+        localStorage.removeItem("masjid");
         delete axios.defaults.headers.common["Authorization"];
         router.push("/masuk");
         resolve();
@@ -106,7 +115,7 @@ export default new Vuex.Store({
     getUser: (state) => state.user,
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
-    getUsername: (state) => state.username,
     getToken: (state) => state.token,
+    getMasjid: (state) => state.masjid,
   },
 });

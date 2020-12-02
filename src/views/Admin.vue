@@ -34,7 +34,21 @@
           <v-list-item-title class="title">
             {{ this.$store.getters.getUser }}
           </v-list-item-title>
-          <v-list-item-subtitle> Masjid Nurul Huda </v-list-item-subtitle>
+          <v-list-item-subtitle v-if="!!masjidList">
+            <v-menu offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <div v-bind="attrs" v-on="on">
+                  {{ getActiveMasjidName }}
+                  <v-icon>mdi-menu-down</v-icon>
+                </div>
+              </template>
+              <v-list>
+                <v-list-item v-for="(masjid, index) in masjidList" :key="index" link>
+                  <v-list-item-title v-if="!!masjid" @click="activeMasjidIdx = index">{{ masjid.name }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-list-item-subtitle>
         </v-list-item-content>
         <v-btn icon @click.stop="mini = !mini">
           <v-icon>mdi-chevron-left</v-icon>
@@ -77,6 +91,7 @@
       </v-list>
 
       <v-divider></v-divider>
+
       <template v-slot:append>
         <v-list-item link @click="logout">
           <v-list-item-icon>
@@ -101,6 +116,8 @@ export default {
   data() {
     return {
       drawer: false,
+      masjidList: [],
+      activeMasjidIdx: 0,
       items: [
         {
           title: "Beranda",
@@ -134,9 +151,41 @@ export default {
       mini: false,
     };
   },
+  mounted() {
+    var masjidIdList = this.$store.getters.getMasjid.split(';');
+    masjidIdList.pop();
+    console.log(masjidIdList);
+    for (var masjidId of masjidIdList) {
+      this.addMasjidById(masjidId);
+    }
+  },
+  computed: {
+    getActiveMasjidName() {
+      if(this.masjidList.length > 0){
+        if(this.masjidList[this.activeMasjidIdx] !== undefined){
+          return this.masjidList[this.activeMasjidIdx].name;
+        } else {
+          return "";
+        }
+      } else {
+        return "";
+      }
+    },
+  },
   methods: {
     logout: function () {
       this.$store.dispatch("logout");
+    },
+    addMasjidById: function (masjidId) {
+      this.axios("masjid/detail/" + masjidId)
+        .then((response) => {
+          if(response.data.data !== null){
+            this.masjidList.push(response.data.data);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
