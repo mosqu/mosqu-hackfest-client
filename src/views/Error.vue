@@ -1,5 +1,5 @@
 <template>
-  <div>
-    <h1>Ini halaman Error</h1>
-  </div>
+  <v-container>
+    <div class="display-1 mt-6">Halaman tidak ditemukan</div>
+  </v-container>
 </template>
