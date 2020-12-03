@@ -46,11 +46,11 @@
 </template>
 
 <script>
-  import HomeAbout from "../components/Home/HomeAbout";
-  import HomeFeature from "../components/Home/HomeFeature";
-  import HomeRegister from "../components/Home/HomeRegister";
-  import HomeFAQ from "../components/Home/HomeFAQ";
-  import HomeFooter from "../components/Home/HomeFooter";
+  import HomeAbout from "@/views/Home/HomeAbout";
+  import HomeFeature from "@/views/Home/HomeFeature";
+  import HomeRegister from "@/views/Home/HomeRegister";
+  import HomeFAQ from "@/views/Home/HomeFAQ";
+  import HomeFooter from "@/views/Home/HomeFooter";
 
   export default {
     components: {

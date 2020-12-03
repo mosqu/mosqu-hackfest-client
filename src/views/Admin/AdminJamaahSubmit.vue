@@ -16,19 +16,19 @@
           <v-text-field outlined v-model="jamaah.keahlian_khusus" label="Keahlian Khusus"></v-text-field>
         </v-card-text>
       </v-card>
-      <v-card v-for="member in members" :key="member" flat outlined class="ma-4">
+      <v-card v-for="(memberId, index) in members" :key="memberId" flat outlined class="ma-4">
         <v-toolbar flat color="primary white--text">
-          <v-toolbar-title>Anggota {{ member }}</v-toolbar-title>
+          <v-toolbar-title>Anggota {{ memberId }}</v-toolbar-title>
         </v-toolbar>
         <v-card-text>
-          <v-text-field outlined v-model="jamaah.member[member].name" label="Nama"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[member].age" label="Umur"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[member].age" label="Status Dalam Keluarga"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[member].nomor_hp" label="Nomor HP"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[member].occupation" label="Pekerjaan"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[member].salary" label="Penghasilan"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[member].status_mukim" label="Status Mukim"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[member].keahlian_khusus" label="Keahlian Khusus"></v-text-field>
+          <v-text-field outlined v-model="jamaah.member[index].name" label="Nama"></v-text-field>
+          <v-text-field outlined v-model="jamaah.member[index].age" label="Umur"></v-text-field>
+          <v-text-field outlined v-model="jamaah.member[index].status" label="Status Dalam Keluarga"></v-text-field>
+          <v-text-field outlined v-model="jamaah.member[index].nomor_hp" label="Nomor HP"></v-text-field>
+          <v-text-field outlined v-model="jamaah.member[index].occupation" label="Pekerjaan"></v-text-field>
+          <v-text-field outlined v-model="jamaah.member[index].salary" label="Penghasilan"></v-text-field>
+          <v-text-field outlined v-model="jamaah.member[index].status_mukim" label="Status Mukim"></v-text-field>
+          <v-text-field outlined v-model="jamaah.member[index].keahlian_khusus" label="Keahlian Khusus"></v-text-field>
         </v-card-text>
       </v-card>
       <v-card flat outlined class="ma-4">
@@ -42,7 +42,7 @@
           <v-text-field outlined v-model="jamaah.catatan" label="Catatan"></v-text-field>
         </v-card-text>
       </v-card>
-      <v-btn @click="members++" color="primary">
+      <v-btn @click="addMember" color="primary">
         Tambahkan Anggota
       </v-btn>
       <v-btn @click="submitJamaah" color="primary">
@@ -55,13 +55,19 @@
 export default {
   data(){
     return{
-      jamaah: {},
-      members: 0
+      jamaah: {
+        member: [{}]
+      },
+      members: []
     }
   },
   methods:{
     submitJamaah(){
-      console.log(this.jamaah)
+      console.log(this.jamaah.member[0].name)
+    },
+    addMember(){
+      this.members.push(this.members.length + 1);
+      console.log(this.members);
     }
   }
 };

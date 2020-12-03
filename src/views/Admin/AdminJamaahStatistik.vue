@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import BarChart from "../BarChart";
+import BarChart from "@/components/BarChart";
 export default {
   components: {
     BarChart
