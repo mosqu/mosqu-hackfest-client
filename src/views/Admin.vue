@@ -133,6 +133,7 @@ export default {
             { title: "Submit Data Jamaah", link: "/admin/jamaah/submit" },
             { title: "Lihat Data Jamaah", link: "/admin/jamaah/list" },
             { title: "Lihat Statistik Jamaah", link: "/admin/jamaah/statistik" },
+            { title: "Blast Whatsapp", link: "/admin/jamaah/blast" },
           ],
         },
         {

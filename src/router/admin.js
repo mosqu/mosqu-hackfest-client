@@ -41,6 +41,12 @@ const route = [
             component: require("@/views/Admin/AdminJamaahStatistik.vue").default,
           },
 
+          {
+            path: "blast",
+            name: "blast-wa",
+            component: require("@/views/Admin/AdminJamaahBlast.vue").default,
+          },
+
         ],
       },
 
