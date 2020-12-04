@@ -40,19 +40,49 @@
 
 <script>
 export default {
+  
   data() {
     return {
       message: "",
-      phone: ""
+      phone: "",
+      connection: null,
     };
   },
+
+  created: function() {
+      this.connectWebSocket();
+  },
+  
   methods: {
     sendMessage() {
-      console.log({
+      this.connection.send(JSON.stringify({
         message: this.message,
         phone: this.phone
-      })
-    }
+      }));
+    },
+
+    connectWebSocket() {
+            console.log("Starting connection to WebSocket Server");
+            const url = process.env.NODE_ENV == 'development' ? 'localhost:3000' : 'mosqu-service.herokuapp.com';
+            this.connection = new WebSocket(`ws://${url}/blast`);
+
+            this.connection.onmessage = function(event) {
+              console.log(event);
+            }
+
+            this.connection.onopen = function() {
+                console.log("Successfully connected to the websocket server...");
+            }
+
+            this.connection.onerror = function(error) {
+                console.log(`WebSocket error: ${error}`);
+            }
+
+            this.connection.onclose = function() {
+                console.log("Connection to the websocket server is closed...");
+            }
+       }
+
   }
 };
 </script>
