@@ -33,12 +33,18 @@
             </v-btn>
           </div>
         </v-col>
+        <v-col lg="12" md="12" sm="12">
+          <canvas id="canvas" width="600" height="600"></canvas>
+        </v-col>
       </v-row>
     </div>
   </v-container>
 </template>
 
 <script>
+
+const QRCode = require('qrcode');
+
 export default {
   
   data() {
@@ -54,7 +60,7 @@ export default {
   },
   
   methods: {
-    sendMessage() {
+    sendMessage() {    
       this.connection.send(JSON.stringify({
         message: this.message,
         phone: this.phone
@@ -68,6 +74,23 @@ export default {
 
             this.connection.onmessage = function(event) {
               console.log(event);
+              const data = JSON.parse(event.data);
+
+              if (data.qr) {
+                const canvas = document.getElementById('canvas');
+                QRCode.toCanvas(canvas, data.qr, function (error) {
+                  if (error) {
+                    console.error(error) 
+                  } else {
+                    console.log('success!');
+                  }
+                });
+              }
+
+              if (data.status) {
+                alert(data.status);
+              }
+
             }
 
             this.connection.onopen = function() {
