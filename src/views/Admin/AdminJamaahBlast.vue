@@ -76,19 +76,21 @@ export default {
               console.log(event);
               const data = JSON.parse(event.data);
 
-              if (data.qr) {
+              if (data.action == 'qr') {
                 const canvas = document.getElementById('canvas');
-                QRCode.toCanvas(canvas, data.qr, function (error) {
+                QRCode.toCanvas(canvas, data.msg, function (error) {
                   if (error) {
                     console.error(error) 
                   } else {
                     console.log('success!');
                   }
                 });
-              }
-
-              if (data.status) {
-                alert(data.status);
+              } else if (data.action == 'ready') {
+                const canvas = document.getElementById('canvas');
+                const context = canvas.getContext('2d');
+                context.clearRect(0, 0, canvas.width, canvas.height);
+              } if (data.action == 'done') {
+                alert(data.msg);
               }
 
             }
