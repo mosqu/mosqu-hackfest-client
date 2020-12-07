@@ -124,6 +124,7 @@ export default {
               title: "Lihat Statistik Jamaah",
               link: "/admin/jamaah/statistik",
             },
+            { title: "Blast Whatsapp", link: "/admin/jamaah/blast" },
           ],
         },
         {
