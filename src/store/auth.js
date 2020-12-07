@@ -5,8 +5,6 @@ import router from "../router";
 
 Vue.use(Vuex);
 
-axios.defaults.baseURL = "https://mosqu-service.herokuapp.com";
-
 export default new Vuex.Store({
   state: {
     status: localStorage.getItem("status") || "",
@@ -55,11 +53,8 @@ export default new Vuex.Store({
                 // Get masjid data
                 var masjidData = "";
                 axios.get("/meta_").then(resp => {
-                  var dataMasjid = resp.data.masjid;
-                  for(var masjid of dataMasjid){
-                    masjidData += masjid.masjid_uid.toString() + ";";
-                  }
-                  localStorage.setItem("masjid", masjidData);
+                  var masjidId = resp.data.masjid.masjid_uid;
+                  localStorage.setItem("masjid", masjidId);
                 
                   var payload = { token: token, username: name , masjid: masjidData};
                   commit("auth_success", payload);
