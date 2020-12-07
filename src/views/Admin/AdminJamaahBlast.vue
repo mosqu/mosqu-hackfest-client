@@ -69,8 +69,8 @@ export default {
 
     connectWebSocket() {
             console.log("Starting connection to WebSocket Server");
-            const url = process.env.NODE_ENV == 'development' ? 'localhost:3000' : 'mosqu-service.herokuapp.com';
-            this.connection = new WebSocket(`ws://${url}/blast`);
+            const url = process.env.NODE_ENV == 'development' ? 'ws://localhost:3000' : 'wss://mosqu-service.herokuapp.com';
+            this.connection = new WebSocket(`${url}/blast`);
 
             this.connection.onmessage = function(event) {
               console.log(event);
