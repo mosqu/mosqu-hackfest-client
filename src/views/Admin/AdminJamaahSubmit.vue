@@ -6,69 +6,280 @@
           <v-toolbar-title>Kepala Keluarga</v-toolbar-title>
         </v-toolbar>
         <v-card-text>
-          <v-text-field outlined v-model="jamaah.name" label="Nama"></v-text-field>
-          <v-text-field outlined v-model="jamaah.address" label="Alamat"></v-text-field>
-          <v-text-field outlined v-model="jamaah.age" label="Umur"></v-text-field>
-          <v-text-field outlined v-model="jamaah.nomor_hp" label="Nomor HP"></v-text-field>
-          <v-text-field outlined v-model="jamaah.occupation" label="Pekerjaan"></v-text-field>
-          <v-text-field outlined v-model="jamaah.salary" label="Penghasilan"></v-text-field>
-          <v-text-field outlined v-model="jamaah.status_mukim" label="Status Mukim"></v-text-field>
-          <v-text-field outlined v-model="jamaah.keahlian_khusus" label="Keahlian Khusus"></v-text-field>
+          <v-text-field
+            outlined
+            v-model="jamaah.name"
+            label="Nama"
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="jamaah.address"
+            label="Alamat"
+          ></v-text-field>
+          <v-menu
+            v-model="menu[0]"
+            :close-on-content-click="false"
+            max-width="290"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                :value="!jamaah.birthdate ? '' : formatDate(jamaah.birthdate)"
+                outlined
+                clearable
+                label="Tanggal Lahir"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+                @click:clear="jamaah.birthdate = null"
+              ></v-text-field>
+            </template>
+            <v-date-picker
+              v-model="jamaah.birthdate"
+              :max="new Date().toISOString().substr(0, 10)"
+              no-title
+              @change="closeAndUpdateAge(0)"
+            ></v-date-picker>
+          </v-menu>
+          <v-text-field
+            outlined
+            v-model="jamaah.age"
+            readonly
+            type="number"
+            label="Umur"
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="jamaah.nomor_hp"
+            hint="Gunakan format 08XXXXXXXX"
+            type="number"
+            label="Nomor HP"
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="jamaah.occupation"
+            label="Pekerjaan"
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="jamaah.salary"
+            label="Penghasilan"
+          ></v-text-field>
+          <v-select
+            :items="['Menetap', 'Sementara']"
+            outlined
+            v-model="jamaah.status_mukim"
+            label="Status Mukim"
+          ></v-select>
+          <v-text-field
+            outlined
+            v-model="jamaah.keahlian_khusus"
+            label="Keahlian Khusus"
+          ></v-text-field>
         </v-card-text>
       </v-card>
-      <v-card v-for="(memberId, index) in members" :key="memberId" flat outlined class="ma-4">
+      <v-card
+        v-for="(member, index) in members"
+        :key="index"
+        flat
+        outlined
+        class="ma-4"
+      >
         <v-toolbar flat color="primary white--text">
-          <v-toolbar-title>Anggota {{ memberId }}</v-toolbar-title>
+          <v-toolbar-title>Anggota {{ index + 1 }}</v-toolbar-title>
         </v-toolbar>
         <v-card-text>
-          <v-text-field outlined v-model="jamaah.member[index].name" label="Nama"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[index].age" label="Umur"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[index].status" label="Status Dalam Keluarga"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[index].nomor_hp" label="Nomor HP"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[index].occupation" label="Pekerjaan"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[index].salary" label="Penghasilan"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[index].status_mukim" label="Status Mukim"></v-text-field>
-          <v-text-field outlined v-model="jamaah.member[index].keahlian_khusus" label="Keahlian Khusus"></v-text-field>
+          <v-text-field
+            outlined
+            v-model="members[index].name"
+            label="Nama"
+          ></v-text-field>
+
+          <v-menu
+            v-model="menu[index + 1]"
+            :close-on-content-click="false"
+            max-width="290"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                :value="
+                  !members[index].birthdate
+                    ? ''
+                    : formatDate(members[index].birthdate)
+                "
+                outlined
+                clearable
+                label="Tanggal Lahir"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+                @click:clear="members[index].birthdate = null"
+              ></v-text-field>
+            </template>
+            <v-date-picker
+              v-model="members[index].birthdate"
+              :max="new Date().toISOString().substr(0, 10)"
+              no-title
+              @change="closeAndUpdateAge(index + 1)"
+            ></v-date-picker>
+          </v-menu>
+          <v-text-field
+            outlined
+            v-model="members[index].age"
+            type="number"
+            label="Umur"
+          ></v-text-field>
+          <v-select
+            :items="['Istri', 'Anak']"
+            outlined
+            v-model="members[index].family_status"
+            label="Status Dalam Keluarga"
+          ></v-select>
+          <v-text-field
+            outlined
+            v-model="members[index].additional_info.nomor_hp"
+            type="number"
+            label="Nomor HP"
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="members[index].occupation"
+            label="Pekerjaan"
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="members[index].salary"
+            label="Penghasilan"
+          ></v-text-field>
+          <v-select
+            :items="['Menetap', 'Sementara']"
+            outlined
+            v-model="members[index].additional_info.status_mukim"
+            label="Status Mukim"
+          ></v-select>
+          <v-text-field
+            outlined
+            v-model="members[index].additional_info.keahlian_khusus"
+            label="Keahlian Khusus"
+          ></v-text-field>
         </v-card-text>
       </v-card>
+      <v-btn class="ma-4" @click="addMember" color="primary">
+        Tambahkan Anggota
+      </v-btn>
+      <v-btn class="ma-4" @click="removeMember" color="accent">
+        Hapus Anggota
+      </v-btn>
       <v-card flat outlined class="ma-4">
         <v-toolbar flat color="primary white--text">
           <v-toolbar-title>Aktivitas</v-toolbar-title>
         </v-toolbar>
         <v-card-text>
-          <v-text-field outlined v-model="jamaah.sholat" label="Sholat"></v-text-field>
-          <v-text-field outlined v-model="jamaah.zakat" label="Zakat"></v-text-field>
-          <v-text-field outlined v-model="jamaah.pengajian" label="Pengajian"></v-text-field>
-          <v-text-field outlined v-model="jamaah.catatan" label="Catatan"></v-text-field>
+          <v-text-field
+            outlined
+            v-model="jamaah.additional_info.sholat"
+            label="Sholat"
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="jamaah.additional_info.zakat"
+            label="Zakat"
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="jamaah.additional_info.pengajian"
+            label="Pengajian"
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="jamaah.additional_info.catatan"
+            label="Catatan"
+          ></v-text-field>
         </v-card-text>
       </v-card>
-      <v-btn @click="addMember" color="primary">
-        Tambahkan Anggota
-      </v-btn>
       <v-btn @click="submitJamaah" color="primary">
         Submit!
+        <v-progress-circular
+          v-if="this.isSubmitLoading == true"
+          class="ml-2"
+          indeterminate
+          color="secondary"
+          size="16"
+          width="2"
+        ></v-progress-circular>
       </v-btn>
     </form>
   </v-container>
 </template>
 <script>
 export default {
-  data(){
-    return{
+  data() {
+    return {
+      isSubmitLoading: false,
+      isSubmitSuccess: false,
+      date: [],
       jamaah: {
-        member: [{}]
+        additional_info: {},
       },
-      members: []
-    }
+      members: [],
+      menu: [false],
+      notEmptyRule: [(v) => !!v || "Kolom ini tidak boleh kosong"],
+    };
   },
-  methods:{
-    submitJamaah(){
-      console.log(this.jamaah.member[0].name)
+  methods: {
+    submitJamaah() {
+      this.jamaah.masjid_uid = this.$store.getters.getMasjid;
+      this.jamaah.member = this.members;
+      console.log(this.jamaah);
+      this.isSubmitLoading = true
+      this.axios
+        .post("/jamaah", this.jamaah)
+        .then((response) => {
+          console.log(response);
+          this.isSubmitSuccess = true;
+          this.isSubmitLoading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.isSubmitLoading = false;
+        });
     },
-    addMember(){
-      this.members.push(this.members.length + 1);
+    addMember() {
+      this.members.push({
+        additional_info: {},
+      });
+      this.menu.push(false);
       console.log(this.members);
-    }
-  }
+    },
+    removeMember() {
+      this.members.pop();
+      this.menu.pop();
+      console.log(this.members);
+    },
+    formatDate(targetDate) {
+      return this.$moment(targetDate).format("D MMMM YYYY");
+    },
+    closeAndUpdateAge(idx) {
+      if (this.jamaah.birthdate != null) {
+        this.jamaah.age = this.$moment().diff(
+          this.$moment(this.jamaah.birthdate),
+          "years"
+        );
+      }
+      console.log(this.jamaah);
+
+      if (this.members.length > 0) {
+        for (var i = 0; i < this.members.length; i++) {
+          if (this.members[i].birthdate != null) {
+            this.members[i].age = this.$moment().diff(
+              this.$moment(this.members[i].birthdate),
+              "years"
+            );
+          }
+        }
+        console.log(this.members);
+      }
+      this.menu[idx] = false;
+    },
+  },
 };
 </script>
