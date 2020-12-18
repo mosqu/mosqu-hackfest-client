@@ -30,6 +30,14 @@
               @click="sendMessage"
             >
               Send
+              <v-progress-circular
+                v-if="loading"
+                class="ml-2"
+                indeterminate
+                color="white"
+                size="16"
+                width="2"
+              ></v-progress-circular>
             </v-btn>
           </div>
         </v-col>
@@ -43,7 +51,8 @@
 
 <script>
 
-const QRCode = require('qrcode');
+const QRCode  = require('qrcode');
+const io = require('socket.io-client');
 
 export default {
   
@@ -52,61 +61,48 @@ export default {
       message: "",
       phone: "",
       connection: null,
+      loading: false
     };
   },
 
   created: function() {
-      this.connectWebSocket();
+      this.connectSocketIo();
   },
   
   methods: {
     sendMessage() {    
-      this.connection.send(JSON.stringify({
+      this.loading = true;
+      this.connection.emit('blast', {
         message: this.message,
         phone: this.phone
-      }));
+      });
     },
 
-    connectWebSocket() {
-            console.log("Starting connection to WebSocket Server");
-            const url = process.env.NODE_ENV == 'development' ? 'ws://localhost:3000' : 'wss://mosqu-service.herokuapp.com';
-            this.connection = new WebSocket(`${url}/blast`);
+    connectSocketIo() {
+      const url = process.env.NODE_ENV == 'development' ? 'http://localhost:3000' : 'https://mosqu-service.herokuapp.com';
+      this.connection = io(url);
+      const _this = this;
 
-            this.connection.onmessage = function(event) {
-              console.log(event);
-              const data = JSON.parse(event.data);
-
-              if (data.action == 'qr') {
-                const canvas = document.getElementById('canvas');
-                QRCode.toCanvas(canvas, data.msg, function (error) {
-                  if (error) {
-                    console.error(error) 
-                  } else {
-                    console.log('success!');
-                  }
-                });
-              } else if (data.action == 'ready') {
-                const canvas = document.getElementById('canvas');
-                const context = canvas.getContext('2d');
-                context.clearRect(0, 0, canvas.width, canvas.height);
-              } if (data.action == 'done') {
-                alert(data.msg);
+      this.connection.on('blast/response', function (data) {
+          if (data.action == 'qr') {
+            _this.loading = false;
+            const canvas = document.getElementById('canvas');
+            QRCode.toCanvas(canvas, data.msg, function (error) {
+              if (error) {
+                console.error(error) 
+              } else {
+                console.log('success!');
               }
-
-            }
-
-            this.connection.onopen = function() {
-                console.log("Successfully connected to the websocket server...");
-            }
-
-            this.connection.onerror = function(error) {
-                console.log(`WebSocket error: ${error}`);
-            }
-
-            this.connection.onclose = function() {
-                console.log("Connection to the websocket server is closed...");
-            }
-       }
+            });
+          } else if (data.action == 'ready') {
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
+          } if (data.action == 'done') {
+            alert(data.msg);
+          }
+      });
+    },
 
   }
 };
