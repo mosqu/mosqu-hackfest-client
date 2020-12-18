@@ -207,6 +207,23 @@
           width="2"
         ></v-progress-circular>
       </v-btn>
+      <v-dialog v-model="dialog" max-width="290">
+        <v-card>
+          <v-card-title class="headline"> Info </v-card-title>
+
+          <v-card-text>
+            {{ dialogMessage }}
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn color="green darken-1" text @click="dialog = false">
+              OK
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </form>
   </v-container>
 </template>
@@ -223,6 +240,8 @@ export default {
       members: [],
       menu: [false],
       notEmptyRule: [(v) => !!v || "Kolom ini tidak boleh kosong"],
+      dialog: false,
+      dialogMessage: "",
     };
   },
   methods: {
@@ -230,17 +249,22 @@ export default {
       this.jamaah.masjid_uid = this.$store.getters.getMasjid;
       this.jamaah.member = this.members;
       console.log(this.jamaah);
-      this.isSubmitLoading = true
+      this.isSubmitLoading = true;
       this.axios
         .post("/jamaah", this.jamaah)
         .then((response) => {
           console.log(response);
           this.isSubmitSuccess = true;
           this.isSubmitLoading = false;
+          this.dialogMessage = "Submit sukses!"
+          this.dialog = true;
+          this.clear();
         })
         .catch((error) => {
           console.log(error);
           this.isSubmitLoading = false;
+          this.dialogMessage = "Submit gagal... \n" + error;
+          this.dialog = true;
         });
     },
     addMember() {
@@ -280,6 +304,11 @@ export default {
       }
       this.menu[idx] = false;
     },
+    clear(){
+      this.jamaah = { additional_info: {} };
+      this.members = [];
+      window.scrollTo(0,0);
+    }
   },
 };
 </script>

@@ -51,12 +51,10 @@ export default new Vuex.Store({
                 axios.defaults.headers.common["Authorization"] = token;
                 console.log("login success");
                 // Get masjid data
-                var masjidData = "";
                 axios.get("/meta_").then(resp => {
                   var masjidId = resp.data.masjid.masjid_uid;
-                  localStorage.setItem("masjid", masjidId);
-                
-                  var payload = { token: token, username: name , masjid: masjidData};
+                  localStorage.setItem("masjid", masjidId)
+                  var payload = { token: token, username: name , masjid: masjidId};
                   commit("auth_success", payload);
                   router.push("/admin");
                   resolve(resp);

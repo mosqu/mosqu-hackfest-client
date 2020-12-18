@@ -38,9 +38,6 @@
             {{ masjidName }}
           </v-list-item-subtitle>
         </v-list-item-content>
-        <v-btn icon @click.stop="mini = !mini">
-          <v-icon>mdi-chevron-left</v-icon>
-        </v-btn>
       </v-list-item>
 
       <v-divider></v-divider>
