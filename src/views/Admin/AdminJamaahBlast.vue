@@ -30,6 +30,14 @@
               @click="sendMessage"
             >
               Send
+              <v-progress-circular
+                v-if="loading"
+                class="ml-2"
+                indeterminate
+                color="white"
+                size="16"
+                width="2"
+              ></v-progress-circular>
             </v-btn>
           </div>
         </v-col>
@@ -53,6 +61,7 @@ export default {
       message: "",
       phone: "",
       connection: null,
+      loading: false
     };
   },
 
@@ -62,6 +71,7 @@ export default {
   
   methods: {
     sendMessage() {    
+      this.loading = true;
       this.connection.emit('blast', {
         message: this.message,
         phone: this.phone
@@ -71,9 +81,11 @@ export default {
     connectSocketIo() {
       const url = process.env.NODE_ENV == 'development' ? 'http://localhost:3000' : 'https://mosqu-service.herokuapp.com';
       this.connection = io(url);
+      const _this = this;
 
       this.connection.on('blast/response', function (data) {
           if (data.action == 'qr') {
+            _this.loading = false;
             const canvas = document.getElementById('canvas');
             QRCode.toCanvas(canvas, data.msg, function (error) {
               if (error) {
