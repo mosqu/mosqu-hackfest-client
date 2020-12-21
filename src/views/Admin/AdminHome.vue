@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-row>
-        <v-col v-for="(item, i) in items.slice(1)" :key="i">
+        <v-col v-for="(item, i) in $store.getters.getMenus" :key="i">
           <v-card>
             <v-card-title primary-title>
               <v-icon class="mr-2">{{ item.icon }}</v-icon>
@@ -21,12 +21,12 @@
 export default {
   data() {
     return {
-      items: [
-        { title: "Beranda", icon: "mdi-view-dashboard", link: "/admin/home" },
-        { title: "Jamaah", icon: "mdi-account-box", link: "/admin/jamaah" },
-        { title: "Keuangan", icon: "mdi-cart", link: "/admin/keuangan" },
-        { title: "Kegiatan", icon: "mdi-calendar", link: "/admin/kegiatan" },
-      ],
+      // items: [
+      //   { title: "Beranda", icon: "mdi-view-dashboard", link: "/admin/home" },
+      //   { title: "Jamaah", icon: "mdi-account-box", link: "/admin/jamaah" },
+      //   { title: "Keuangan", icon: "mdi-cart", link: "/admin/keuangan" },
+      //   { title: "Kegiatan", icon: "mdi-calendar", link: "/admin/kegiatan" },
+      // ],
     };
   },
 };
