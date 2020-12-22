@@ -60,6 +60,25 @@ const route = [
         path: "kegiatan",
         name: "Kegiatan",
         component: require("@/views/Admin/AdminKegiatan.vue").default,
+        redirect: "/admin/kegiatan/submit",
+        children: [
+
+          {
+            path: "submit",
+            name: "Tambahkan Kegiatan",
+            component: require("@/views/Admin/AdminKegiatanSubmit.vue").default,
+          },
+          {
+            path: "list",
+            name: "List Kegiatan",
+            component: require("@/views/Admin/AdminKegiatanList.vue").default,
+          },
+          {
+            path: "submitMember",
+            name: "Tambahkan Anggota Kegiatan",
+            component: require("@/views/Admin/AdminKegiatanSubmitMember.vue").default,
+          },
+        ],
       },
       
     ],
