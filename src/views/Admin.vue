@@ -134,7 +134,10 @@ export default {
           title: "Kegiatan",
           icon: "mdi-calendar",
           link: "/admin/kegiatan",
-          childs: [],
+          childs: [
+            { title: "Tambahkan Kegiatan", link: "/admin/kegiatan/submit" },
+            { title: "Lihat Seluruh Kegiatan", link: "/admin/kegiatan/list" },
+          ],
         },
       ],
       mini: false,

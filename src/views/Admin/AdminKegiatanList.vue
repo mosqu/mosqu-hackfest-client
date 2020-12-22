@@ -16,12 +16,19 @@
           ></v-text-field>
         </template>
         <template v-slot:item.action>
-          <v-btn icon>
-            <v-icon small> mdi-pencil </v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon small> mdi-delete </v-icon>
-          </v-btn>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                icon
+                to="submitMember"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon small> mdi-account-plus </v-icon>
+              </v-btn>
+            </template>
+            <span>Tambahkan Anggota</span>
+          </v-tooltip>
         </template>
       </v-data-table>
     </div>
@@ -35,19 +42,18 @@ export default {
       search: "",
       headers: [
         { text: "No", value: "no" },
-        { text: "Nama", value: "name" },
-        { text: "Alamat", value: "address" },
+        { text: "Nama Kegiatan", value: "name" },
         { text: "Aksi", value: "action" },
       ],
       items: [],
     };
   },
   mounted() {
-    this.axios("jamaah/list/")
+    this.axios("program/list/")
       .then((response) => {
         console.log(response.data);
         this.items = response.data.data;
-        for(var i = 0; i < this.items.length; i++){
+        for (var i = 0; i < this.items.length; i++) {
           this.items[i].no = i + 1;
         }
       })
