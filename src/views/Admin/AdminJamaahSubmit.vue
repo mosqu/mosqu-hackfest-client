@@ -49,8 +49,8 @@
           ></v-text-field>
           <v-text-field
             outlined
-            v-model="jamaah.nomor_hp"
-            hint="Gunakan format 08XXXXXXXX"
+            v-model="jamaah.phone_number"
+            hint="Gunakan format 628XXXXXXXX"
             type="number"
             label="Nomor HP"
           ></v-text-field>
@@ -59,11 +59,22 @@
             v-model="jamaah.occupation"
             label="Pekerjaan"
           ></v-text-field>
-          <v-text-field
-            outlined
-            v-model="jamaah.salary"
+          <v-select
+            :items="status.salary ? status.salary : []"
             label="Penghasilan"
-          ></v-text-field>
+            item-text="description"
+            item-value="status_uid"
+            v-model="jamaah.salary_id"
+            outlined
+          ></v-select>
+          <v-select
+            :items="status.family ? status.family : []"
+            label="Status Keluarga"
+            item-text="description"
+            item-value="status_uid"
+            v-model="jamaah.family_status_id"
+            outlined
+          ></v-select>
           <v-select
             :items="['Menetap', 'Sementara']"
             outlined
@@ -128,15 +139,10 @@
             type="number"
             label="Umur"
           ></v-text-field>
-          <v-select
-            :items="['Istri', 'Anak']"
-            outlined
-            v-model="members[index].family_status"
-            label="Status Dalam Keluarga"
-          ></v-select>
           <v-text-field
             outlined
-            v-model="members[index].additional_info.nomor_hp"
+            v-model="members[index].phone_number"
+            hint="Gunakan format 628XXXXXXXX"
             type="number"
             label="Nomor HP"
           ></v-text-field>
@@ -145,11 +151,22 @@
             v-model="members[index].occupation"
             label="Pekerjaan"
           ></v-text-field>
-          <v-text-field
-            outlined
-            v-model="members[index].salary"
+          <v-select
+            :items="status.salary ? status.salary : []"
             label="Penghasilan"
-          ></v-text-field>
+            item-text="description"
+            item-value="status_uid"
+            v-model="members[index].salary_id"
+            outlined
+          ></v-select>
+          <v-select
+            :items="status.family ? status.family : []"
+            label="Status Keluarga"
+            item-text="description"
+            item-value="status_uid"
+            v-model="members[index].family_status_id"
+            outlined
+          ></v-select>
           <v-select
             :items="['Menetap', 'Sementara']"
             outlined
@@ -242,23 +259,42 @@ export default {
       notEmptyRule: [(v) => !!v || "Kolom ini tidak boleh kosong"],
       dialog: false,
       dialogMessage: "",
+      status: {}
     };
   },
+  async created() {
+    await this.getStatus();
+  },
   methods: {
+    getStatus() {
+      this.axios.get("/jamaah/status")
+        .then((response) => {
+          this.status = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     submitJamaah() {
       this.jamaah.masjid_uid = this.$store.getters.getMasjid;
-      this.jamaah.member = this.members;
+      this.jamaah.members = this.members;
       console.log(this.jamaah);
       this.isSubmitLoading = true;
       this.axios
         .post("/jamaah", this.jamaah)
         .then((response) => {
           console.log(response);
-          this.isSubmitSuccess = true;
-          this.isSubmitLoading = false;
-          this.dialogMessage = "Submit sukses!"
-          this.dialog = true;
-          this.clear();
+          if (response.data.status) {
+            this.isSubmitSuccess = true;
+            this.isSubmitLoading = false;
+            this.dialogMessage = "Submit sukses!"
+            this.dialog = true;
+            this.clear();
+          } else {
+            this.isSubmitLoading = false;
+            this.dialogMessage = "Submit gagal... \n";
+            this.dialog = true;
+          }
         })
         .catch((error) => {
           console.log(error);
