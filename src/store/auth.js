@@ -11,7 +11,7 @@ export default new Vuex.Store({
     token:  localStorage.getItem("token") || "",
     user:   localStorage.getItem("user") || "",
     masjid: localStorage.getItem("masjid") || "",
-    menus:  localStorage.getItem("menus") || ""
+    menus:  localStorage.getItem("menus") ? JSON.parse(localStorage.getItem("menus")) : ""
   },
   mutations: {
     auth_request(state) {
@@ -56,7 +56,9 @@ export default new Vuex.Store({
                 // Get masjid data
                 axios.get("/meta_").then(resp => {
                   var masjidId  = resp.data.masjid.masjid_uid;
-                  localStorage.setItem("masjid", masjidId)
+                  localStorage.setItem("masjid", masjidId);
+                  localStorage.setItem("menus", JSON.stringify(resp.data.menus));
+
                   var payload   = { 
                     token: token, 
                     username: name , 
@@ -77,6 +79,7 @@ export default new Vuex.Store({
                 localStorage.removeItem("token");
                 localStorage.removeItem("user");
                 localStorage.removeItem("masjid");
+                localStorage.removeItem("menus");
                 reject(resp);
               }
             } catch (e) {
@@ -85,6 +88,7 @@ export default new Vuex.Store({
               localStorage.removeItem("token");
               localStorage.removeItem("user");
               localStorage.removeItem("masjid");
+              localStorage.removeItem("menus");
               reject(e);
             }
           })
@@ -94,6 +98,7 @@ export default new Vuex.Store({
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             localStorage.removeItem("masjid");
+            localStorage.removeItem("menus");
             reject(err);
           });
       });
@@ -106,6 +111,7 @@ export default new Vuex.Store({
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         localStorage.removeItem("masjid");
+        localStorage.removeItem("menus");
         delete axios.defaults.headers.common["Authorization"];
         router.push("/masuk");
         resolve();
