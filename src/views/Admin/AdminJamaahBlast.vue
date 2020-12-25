@@ -17,10 +17,20 @@
       <v-row no-gutters>
         <v-col sm="12" md="8" lg="6">
           <div class="phone">
+            <v-select
+              v-model="phone"
+              :items="numbers"
+              chips
+              label="Nomor HP"
+              multiple
+              outlined
+              item-text="name"
+              item-value="phone_number"
+            ></v-select>
             <v-text-field
                 v-model="phone"
                 label="Phone Number"
-                required
+                outlined
             ></v-text-field>
           </div>
           <div class="send">
@@ -61,15 +71,26 @@ export default {
       message: "",
       phone: "",
       connection: null,
-      loading: false
+      loading: false,
+      numbers: [],
     };
   },
 
   created: function() {
       this.connectSocketIo();
+      this.getPhone();
   },
   
   methods: {
+    getPhone() {
+      this.axios("/jamaah/list/phone")
+      .then((response) => {
+        this.numbers = response.data.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
     sendMessage() {    
       this.loading = true;
       this.connection.emit('blast', {

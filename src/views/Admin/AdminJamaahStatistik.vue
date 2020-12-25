@@ -121,7 +121,7 @@ export default {
   methods: {
     getJamaahChart: function() {
       this.loader = true;
-      this.axios(`jamaah/chart`)
+      this.axios(`/jamaah/chart`)
         .then((response) => {
           this.loader = false;
           this.data = response.data;

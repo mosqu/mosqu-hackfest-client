@@ -43,7 +43,7 @@ export default {
     };
   },
   mounted() {
-    this.axios("jamaah/list/")
+    this.axios("/jamaah/list")
       .then((response) => {
         console.log(response.data);
         this.items = response.data.data;
