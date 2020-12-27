@@ -16,7 +16,7 @@
       </v-row>
       <v-row no-gutters>
         <v-col sm="12" md="8" lg="6">
-          <div class="phone">
+          <div class="phone d-flex">
             <v-select
               v-model="phone"
               :items="numbers"
@@ -27,6 +27,18 @@
               item-text="name"
               item-value="phone_number"
             ></v-select>
+            <v-btn
+              fab
+              color="primary"
+              @click.prevent="addNumber"
+              class="ml-2"
+            >
+              <v-icon dark>
+                mdi-plus
+              </v-icon>
+            </v-btn>
+          </div>
+          <div class="phone">
             <v-text-field
                 v-model="phone"
                 label="Phone Number"
@@ -73,6 +85,7 @@ export default {
       connection: null,
       loading: false,
       numbers: [],
+      newNumbers: []
     };
   },
 
@@ -82,6 +95,7 @@ export default {
   },
   
   methods: {
+
     getPhone() {
       this.axios("/jamaah/list/phone")
       .then((response) => {
@@ -91,6 +105,12 @@ export default {
         console.log(error);
       });
     },
+
+    addNumber() {
+      console.log(0)
+      this.newNumbers.push(1);
+    },
+
     sendMessage() {    
       this.loading = true;
       this.connection.emit('blast', {
