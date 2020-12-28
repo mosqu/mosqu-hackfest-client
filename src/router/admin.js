@@ -84,6 +84,11 @@ const route = [
             component: require("@/views/Admin/AdminKegiatanMemberList.vue").default,
             props: true,
           },
+          {
+            path: "uploadMember",
+            name: "Upload Anggota Kegiatan",
+            component: require("@/views/Admin/AdminKegiatanUploadMember.vue").default,
+          },
         ],
       },
       
