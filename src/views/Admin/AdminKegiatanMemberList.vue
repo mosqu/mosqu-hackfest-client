@@ -15,29 +15,6 @@
             class="mx-4"
           ></v-text-field>
         </template>
-        <template v-slot:item.action>
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                icon
-                to="submitMember"
-                v-bind="attrs"
-                v-on="on"
-              >
-                <v-icon small> mdi-account-plus </v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                to="listMember"
-                v-bind="attrs"
-                v-on="on"
-              >
-                <v-icon small> mdi-format-list-bulleted </v-icon>
-              </v-btn>
-            </template>
-            <span>Tambahkan Anggota</span>
-          </v-tooltip>
-        </template>
       </v-data-table>
     </div>
   </v-container>
@@ -45,19 +22,19 @@
 
 <script>
 export default {
+  props: ["masjid_program_uid"],
   data() {
     return {
       search: "",
       headers: [
         { text: "No", value: "no" },
         { text: "Nama Kegiatan", value: "name" },
-        { text: "Aksi", value: "action" },
       ],
       items: [],
     };
   },
   mounted() {
-    this.axios("program/list/")
+    this.axios("program/jamaah/list?masjid_program_uid=" + this.masjid_program_uid)
       .then((response) => {
         console.log(response.data);
         this.items = response.data.data;
