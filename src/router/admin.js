@@ -78,6 +78,11 @@ const route = [
             name: "Tambahkan Anggota Kegiatan",
             component: require("@/views/Admin/AdminKegiatanSubmitMember.vue").default,
           },
+          {
+            path: "uploadMember",
+            name: "Upload Anggota Kegiatan",
+            component: require("@/views/Admin/AdminKegiatanUploadMember.vue").default,
+          },
         ],
       },
       
