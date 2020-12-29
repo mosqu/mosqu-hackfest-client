@@ -28,7 +28,9 @@ export default {
       search: "",
       headers: [
         { text: "No", value: "no" },
-        { text: "Nama Kegiatan", value: "name" },
+        { text: "Nama", value: "name" },
+        { text: "Alamat", value: "address" },
+        { text: "Nomor", value: "phone_number" },
       ],
       items: [],
     };
