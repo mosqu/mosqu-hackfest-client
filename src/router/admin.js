@@ -76,7 +76,13 @@ const route = [
           {
             path: "submitMember",
             name: "Tambahkan Anggota Kegiatan",
-            component: require("@/views/Admin/AdminKegiatanSubmitMember.vue").default,
+            component: require("@/views/Admin/AdminKegiatanMemberSubmit.vue").default,
+          },
+          {
+            path: "listMember/:masjid_program_uid",
+            name: "List Anggota Kegiatan",
+            component: require("@/views/Admin/AdminKegiatanMemberList.vue").default,
+            props: true,
           },
           {
             path: "uploadMember",
