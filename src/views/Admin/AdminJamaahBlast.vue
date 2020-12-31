@@ -18,7 +18,7 @@
         <v-col sm="12" md="8" lg="6">
           <div class="phone d-flex">
             <v-select
-              v-model="phone"
+              v-model="phone1"
               :items="numbers"
               chips
               label="Nomor HP"
@@ -40,7 +40,9 @@
           </div>
           <div class="phone">
             <v-text-field
-                v-model="phone"
+                v-for="num in newNumbers"
+                :key="num"
+                v-model="phone2[num - 1]"
                 label="Phone Number"
                 outlined
             ></v-text-field>
@@ -74,18 +76,19 @@
 <script>
 
 const QRCode  = require('qrcode');
-const io = require('socket.io-client');
+const io      = require('socket.io-client');
 
 export default {
   
   data() {
     return {
       message: "",
-      phone: "",
       connection: null,
       loading: false,
       numbers: [],
-      newNumbers: []
+      newNumbers: [],
+      phone1: [],
+      phone2: []
     };
   },
 
@@ -107,16 +110,32 @@ export default {
     },
 
     addNumber() {
-      console.log(0)
-      this.newNumbers.push(1);
+      const num = this.newNumbers.length - 1 >= 0 ? this.newNumbers[this.newNumbers.length - 1] : 0;
+      this.newNumbers.push(num + 1);
     },
 
     sendMessage() {    
-      this.loading = true;
-      this.connection.emit('blast', {
-        message: this.message,
-        phone: this.phone
-      });
+      if (confirm('Are you sure?')) {
+        const phone = [ ...this.phone1, ...this.phone2 ];
+        if (this.checkPhone(phone)) {
+          this.loading = true;
+          this.connection.emit('blast', {
+            message: this.message,
+            phone: [ ...this.phone1, ...this.phone2 ]
+          });
+        } else {
+          alert('invalid number');
+        }
+      }
+    },
+
+    checkPhone(phone) {
+      const isExist = phone.findIndex(item => item.startsWith('62') == false);
+      if (isExist == -1) {
+        return true;
+      } else {
+        return false;
+      }
     },
 
     connectSocketIo() {
