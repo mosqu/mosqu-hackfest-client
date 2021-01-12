@@ -17,6 +17,12 @@ const route = [
       },
 
       {
+        path: "profile",
+        name: "Profil",
+        component: require("@/views/Admin/AdminProfile.vue").default,
+      },
+
+      {
         path: "jamaah",
         name: "Jamaah",
         component: require("@/views/Admin/AdminJamaah.vue").default,
