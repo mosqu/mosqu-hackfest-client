@@ -49,6 +49,12 @@
           </v-list-item-icon>
           <v-list-item-title>Beranda</v-list-item-title>
         </v-list-item>
+        <v-list-item to="/admin/profile">
+          <v-list-item-icon>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Profil</v-list-item-title>
+        </v-list-item>
         <v-list-group
           v-for="item in $store.getters.getMenus"
           :key="item.title"
@@ -103,40 +109,6 @@ export default {
       drawer: false,
       masjidName: "",
       activeMasjidIdx: 0,
-      // items: [
-      //   {
-      //     title: "Beranda",
-      //     icon: "mdi-view-dashboard",
-      //     link: "/admin/home",
-      //     childs: [],
-      //   },
-      //   {
-      //     title: "Jamaah",
-      //     icon: "mdi-account-box",
-      //     link: "/admin/jamaah",
-      //     childs: [
-      //       { title: "Submit Data Jamaah", link: "/admin/jamaah/submit" },
-      //       { title: "Lihat Data Jamaah", link: "/admin/jamaah/list" },
-      //       {
-      //         title: "Lihat Statistik Jamaah",
-      //         link: "/admin/jamaah/statistik",
-      //       },
-      //       { title: "Blast Whatsapp", link: "/admin/jamaah/blast" },
-      //     ],
-      //   },
-      //   {
-      //     title: "Keuangan",
-      //     icon: "mdi-cart",
-      //     link: "/admin/keuangan",
-      //     childs: [],
-      //   },
-      //   {
-      //     title: "Kegiatan",
-      //     icon: "mdi-calendar",
-      //     link: "/admin/kegiatan",
-      //     childs: [],
-      //   },
-      // ],
       mini: false,
     };
   },

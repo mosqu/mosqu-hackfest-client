@@ -9,6 +9,9 @@ import store from './store/auth'
 import VueMoment from 'vue-moment'
 
 axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? process.env.VUE_APP_LOCALHOST : 'https://mosqu-service.herokuapp.com';
+if(localStorage.getItem("token") != null){
+  axios.defaults.headers.common["Authorization"] = localStorage.getItem("token")
+}
 Vue.prototype.axios = axios
 
 Vue.config.productionTip = false

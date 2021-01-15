@@ -53,7 +53,7 @@ export default new Vuex.Store({
                 // Add to axios header:
                 axios.defaults.headers.common["Authorization"] = token;
                 console.log("login success");
-                // Get masjid data
+                // Get meta data
                 axios.get("/meta_").then(resp => {
                   var masjidId  = resp.data.masjid.masjid_uid;
                   localStorage.setItem("masjid", masjidId);
