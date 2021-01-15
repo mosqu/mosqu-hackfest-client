@@ -4,6 +4,9 @@
       <v-data-table
         :headers="headers"
         :items="items"
+        :options.sync="options"
+        :server-items-length="total"
+        :loading="loading"
         class="elevation-1"
         items-per-page=10
         :search="search"
@@ -25,6 +28,9 @@ export default {
   props: ["masjid_program_uid"],
   data() {
     return {
+      total: 0,
+      loading: true,
+      options: {},
       search: "",
       headers: [
         { text: "No", value: "no" },
@@ -35,18 +41,36 @@ export default {
       items: [],
     };
   },
-  mounted() {
-    this.axios("program/jamaah/list?masjid_program_uid=" + this.masjid_program_uid)
-      .then((response) => {
-        console.log(response.data);
-        this.items = response.data.data;
-        for (var i = 0; i < this.items.length; i++) {
-          this.items[i].no = i + 1;
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  watch: {
+    options: {
+      handler () {
+        this.getDataFromApi();
+      },
+      deep: true,
+    },
   },
+  mounted () {
+    this.getDataFromApi();
+  },
+  methods: {
+    getDataFromApi () {
+        const { sortBy, sortDesc, page, itemsPerPage } = this.options;
+        this.loading = true;
+        this.axios.get(`program/jamaah/list?masjid_program_uid=${this.masjid_program_uid}&sortBy=${sortBy}&sortDesc=${sortDesc}&page=${page}&itemsPerPage=${itemsPerPage}`)
+        .then((response) => {
+          this.items = response.data.data;
+          const start = (page-1)*itemsPerPage;
+          for (var i = 0; i < this.items.length; i++) {
+            this.items[i].no = start + i + 1;
+          }
+          this.total = response.data.total;
+          this.loading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      },
+  },
+  
 };
 </script>
