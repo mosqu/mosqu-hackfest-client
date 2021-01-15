@@ -49,6 +49,12 @@
           </v-list-item-icon>
           <v-list-item-title>Beranda</v-list-item-title>
         </v-list-item>
+        <v-list-item to="/admin/profile">
+          <v-list-item-icon>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Profil</v-list-item-title>
+        </v-list-item>
         <v-list-group
           v-for="item in $store.getters.getMenus"
           :key="item.title"
