@@ -53,6 +53,12 @@ const route = [
             component: require("@/views/Admin/AdminJamaahBlast.vue").default,
           },
 
+          {
+            path: "bot",
+            name: "bot-wa",
+            component: require("@/views/Admin/AdminJamaahBot.vue").default,
+          }
+
         ],
       },
 
